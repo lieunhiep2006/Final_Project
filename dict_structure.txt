@@ -1,0 +1,75 @@
+├── pom.xml
+└── src
+    └── main
+        ├── java
+        │   └── com
+        │       └── bakershop
+        │           ├── model                 # Mapping 1-1 với các bảng trong DB (JavaBeans)
+        │           │   ├── User.java
+        │           │   ├── Category.java
+        │           │   ├── Cake.java
+        │           │   ├── Image.java
+        │           │   ├── Voucher.java
+        │           │   ├── Store.java
+        │           │   ├── Cart.java
+        │           │   ├── CartItem.java
+        │           │   ├── Order.java
+        │           │   ├── OrderItem.java
+        │           │   └── Review.java
+        │           ├── dao                   # Lớp thao tác dữ liệu DB (Data Access Object)
+        │           │   ├── DBContext.java    # Quản lý kết nối PostgreSQL (JDBC/DataSource)
+        │           │   ├── UserDAO.java
+        │           │   ├── CategoryDAO.java
+        │           │   ├── CakeDAO.java
+        │           │   ├── CartDAO.java
+        │           │   ├── OrderDAO.java
+        │           │   ├── VoucherDAO.java
+        │           │   └── ReviewDAO.java
+        │           ├── controller            # Servlet điều hướng nghiệp vụ
+        │           │   ├── HomeController.java
+        │           │   ├── ProductController.java
+        │           │   ├── CartController.java
+        │           │   ├── CheckoutController.java
+        │           │   ├── AuthController.java
+        │           │   └── admin
+        │           │       ├── AdminDashboardController.java
+        │           │       ├── AdminProductController.java
+        │           │       └── AdminOrderController.java
+        │           ├── filter                # Lọc request (Phân quyền Admin/User, UTF-8)
+        │           │   ├── AuthenticationFilter.java
+        │           │   └── EncodingFilter.java
+        │           └── utils                 # Tiện ích chung
+        │               ├── PasswordUtils.java  # Hash mật khẩu (BCrypt)
+        │               └── CurrencyUtils.java  # Định dạng tiền tệ NUMERIC
+        ├── resources                         # Cấu hình hệ thống
+        │   └── db.properties                 # Thông số kết nối DB
+        └── webapp
+            ├── WEB-INF
+            │   ├── web.xml                   # Cấu hình Servlet & Deployment Descriptor
+            │   └── views                     # Đặt JSP ở đây để chặn truy cập trực tiếp qua URL
+            │       ├── common
+            │       │   ├── header.jsp
+            │       │   ├── footer.jsp
+            │       │   └── navbar.jsp
+            │       ├── auth
+            │       │   ├── login.jsp
+            │       │   └── register.jsp
+            │       ├── shop
+            │       │   ├── home.jsp
+            │       │   ├── product-list.jsp
+            │       │   ├── product-detail.jsp
+            │       │   ├── cart.jsp
+            │       │   └── checkout.jsp
+            │       └── admin
+            │           ├── dashboard.jsp
+            │           ├── manage-cakes.jsp
+            │           └── manage-orders.jsp
+            ├── static                        # Tài nguyên tĩnh
+            │   ├── css
+            │   │   ├── main.css
+            │   │   └── admin.css
+            │   ├── js
+            │   │   ├── cart.js
+            │   │   └── main.js
+            │   └── images                    # Ảnh tĩnh giao diện / Uploads
+            └── index.jsp                     # Trang điều hướng chính về HomeController
