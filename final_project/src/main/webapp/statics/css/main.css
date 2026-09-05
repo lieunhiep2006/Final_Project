@@ -11,6 +11,7 @@
     --bg-light: #fefae0;         
     --text-dark: #3d405b;        
     --white: #ffffff;
+    --cherry: #D2042D; 
 }
 
 body {
@@ -385,7 +386,7 @@ body {
 }
 .btn-order {
   display: inline-block;
-  background: var(--cherry);
+  background: #8a3034;
   color: var(--white);
   font-weight: 700;
   padding: 0.9rem 2.2rem;
@@ -412,4 +413,14 @@ body {
   background-size: 40px 28px;
   background-repeat: repeat-x;
   opacity: 0.9;
+}
+.about-hero {
+    background-image: linear-gradient(rgba(61, 64, 91, 0.6), rgba(61, 64, 91, 0.6)), url('../images/about-story.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+}
+
+.about-hero .hero-content p {
+    color: var(--bg-light);
 }
