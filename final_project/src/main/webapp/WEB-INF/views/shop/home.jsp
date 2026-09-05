@@ -20,14 +20,13 @@
     <section class="featured-products">
         <h2>Bánh bán chạy nhất</h2>
         <div class="product-grid">
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/creampuffs.jpg" alt="Bánh su kem">
-                <h3>Bánh su kem</h3>
-            </div>
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/macarons.jpg" alt="Bánh Macaron">
-                <h3>Bánh Macaron</h3>
-            </div>
+            <c:forEach var="cake" items="${cakeList}">
+                <div class="product-card">
+                    <img src="${cake.imageUrl}" alt="${cake.name}" referrerpolicy="no-referrer">
+                    <h3>${cake.name}</h3>
+                    <p>${cake.price}</p>
+                </div>
+            </c:forEach>
         </div>
     </section>
 
@@ -44,7 +43,6 @@
             </div>
         </div>
     </section>
-
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
-</html>
+</html>>
