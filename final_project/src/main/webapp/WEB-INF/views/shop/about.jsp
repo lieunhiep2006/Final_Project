@@ -7,14 +7,13 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/navbar.jsp" />
-
-    <section class="hero">
+    <section class="hero about-hero">
         <div class="hero-content">
             <h1>Từ bếp nhỏ đến tiệm bánh</h1>
             <p>BakerShop bắt đầu từ một nhóm sinh viên, nướng từng mẻ nhỏ cho hàng xóm trước khi trở thành tiệm bánh của ngày hôm nay.</p>
         </div>
     </section>
-    
+
     <section class="about">
         <h2>Cam kết / Nhiệm vụ</h2>
         <div class="about-grid">
