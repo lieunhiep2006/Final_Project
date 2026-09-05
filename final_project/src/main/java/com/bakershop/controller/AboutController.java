@@ -16,5 +16,3 @@ public class AboutController extends HttpServlet {
         dispatcher.forward(request,response);
     }
 }
-
-//Viet giong dynamic nhung la web static do, khong co van de gi het

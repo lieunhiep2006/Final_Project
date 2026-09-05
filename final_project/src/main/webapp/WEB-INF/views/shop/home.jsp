@@ -13,7 +13,7 @@
         <div class="hero-content">
             <h1>Mới nướng, giao hàng ngày</h1>
             <p>Bánh mì, bánh ngọt thủ công — trực tiếp từ lò nướng đến tận nhà</p>
-            <a href="#" class="btn-order">Đặt hàng ngay</a>
+            <a href="${pageContext.request.contextPath}/products" class="btn-order">Đặt hàng ngay</a>
         </div>
     </section>
 
