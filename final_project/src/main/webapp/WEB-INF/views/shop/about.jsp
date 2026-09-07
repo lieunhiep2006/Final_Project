@@ -7,35 +7,43 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/navbar.jsp" />
+    <main class="about-page">
+        <div class="about-breadcrumb">
+            <a href="${pageContext.request.contextPath}/home">Trang chủ</a>
+            <span>/</span>
+            <span>Giới thiệu</span>
+        </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Từ bếp nhỏ đến tiệm bánh</h1>
-            <p>BakerShop bắt đầu từ một nhóm sinh viên, nướng từng mẻ nhỏ cho hàng xóm trước khi trở thành tiệm bánh của ngày hôm nay.</p>
-        </div>
-    </section>
-    
-    <section class="about">
-        <h2>Cam kết / Nhiệm vụ</h2>
-        <div class="about-grid">
-            <div class="about-item">
-                <h3>Chất lượng</h3>
-                <p>Nguyên liệu mới hàng ngày,số lượng ít, không chất bảo quản.</p>
+        <section class="about-feature about-feature-first">
+            <img src="${pageContext.request.contextPath}/statics/images/about-story.jpg" alt="Bánh mì mới nướng tại BakeryShop">
+            <div class="about-feature-copy">
+                <h1>Về BakeryShop</h1>
+                <p>BakeryShop bắt đầu từ một căn bếp nhỏ và tình yêu dành cho những mẻ bánh vừa ra lò. Mỗi ngày, chúng tôi chuẩn bị bánh với nguyên liệu chọn lọc, làm thủ công từng bước và giao đến khách hàng khi bánh vẫn giữ được hương thơm tươi mới.</p>
+                <a class="about-link" href="${pageContext.request.contextPath}/products">Khám phá bánh</a>
             </div>
-            <div class="about-item">
-                <h3>Truyền thống</h3>
-                <p>Công thức nấu ăn truyền thống, kỹ thuật thủ công</p>
+        </section>
+
+        <section class="about-statement">
+            <p><strong>BAKERSHOP</strong> là nơi những công thức thân quen được làm mới bằng sự tận tâm, từ chiếc bánh nhỏ trong căn bếp đến niềm vui trên bàn ăn của mỗi gia đình.</p>
+        </section>
+
+        <section class="about-feature about-feature-reverse">
+            <div class="about-feature-copy">
+                <h2>Tầm nhìn &amp; sứ mệnh</h2>
+                <p>Mục tiêu của BakeryShop là trở thành tiệm bánh được tin yêu nhờ chất lượng ổn định, hương vị gần gũi và trải nghiệm mua hàng chu đáo.</p>
+                <p>Chúng tôi ưu tiên nguyên liệu rõ nguồn gốc, hạn chế sản xuất dư thừa và liên tục hoàn thiện công thức để mỗi sản phẩm đều đáng nhớ.</p>
             </div>
-            <div class="about-item">
-                <h3>Cộng đồng</h3>
-                <p>Nguyên liệu từ người dân địa phương, hỗ trợ người trồng trực tiếp</p>
+            <img src="${pageContext.request.contextPath}/statics/images/homebakery.jpg" alt="Thợ làm bánh chuẩn bị bánh tại BakeryShop">
+        </section>
+
+        <section class="about-feature about-feature-last">
+            <img src="${pageContext.request.contextPath}/statics/images/bagels.jpg" alt="Các loại bánh mì thủ công của BakeryShop">
+            <div class="about-feature-copy">
+                <h2>Thủ công mỗi ngày</h2>
+                <p>Từ khâu trộn bột, tạo hình đến nướng bánh, mọi công đoạn đều được thực hiện cẩn thận. Chúng tôi tin rằng sự kiên nhẫn của người làm bánh tạo nên khác biệt trong từng miếng bánh.</p>
             </div>
-                <div class="about-item">
-                <h3>Tận tâm</h3>
-                <p>Mọi đơn hàng đều được thực hiện chu đáo, không nướng hàng loạt</p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

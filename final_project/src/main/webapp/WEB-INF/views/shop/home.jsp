@@ -9,11 +9,23 @@
 <body>
     <jsp:include page="/WEB-INF/views/common/navbar.jsp" />
 
-    <section class="hero">
+    <section class="hero home-hero">
         <div class="hero-content">
             <h1>Mới nướng, giao hàng ngày</h1>
             <p>Bánh mì, bánh ngọt thủ công — trực tiếp từ lò nướng đến tận nhà</p>
-            <a href="#" class="btn-order">Đặt hàng ngay</a>
+            <a href="${pageContext.request.contextPath}/products" class="btn-order">Đặt hàng ngay</a>
+        </div>
+    </section>
+
+    <section class="story-banner">
+        <div class="story-inner">
+            <div class="story-brand">
+                <span>BAKER</span>
+                <small>EST.2026</small>
+            </div>
+            <div class="story-copy">
+                <p><strong>BakerShop</strong> là một trong những thương hiệu bánh mới được đông đảo người tiêu dùng yêu thích. Thành công đó có được là nhờ những phấn đấu không ngừng từ một tiệm bánh nhỏ cho đến ngày hôm nay</p>
+            </div>
         </div>
     </section>
 
@@ -21,18 +33,49 @@
         <h2>Bánh bán chạy nhất</h2>
         <div class="product-grid">
             <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/creampuffs.jpg" alt="Bánh su kem">
+                <img src="${pageContext.request.contextPath}/statics/images/creampuffs.jpg" alt="Bánh su kem"> 
                 <h3>Bánh su kem</h3>
             </div>
+
             <div class="product-card">
                 <img src="${pageContext.request.contextPath}/statics/images/macarons.jpg" alt="Bánh Macaron">
                 <h3>Bánh Macaron</h3>
+            </div>
+
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/statics/images/bluefudge.jpg" alt="Bánh Fudge việt quất">
+                <h3>Bánh Fudge việt quất</h3>
+            </div>
+
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/statics/images/corncake.jpg" alt="Bánh ngô">
+                <h3>Bánh Ngô</h3>
+            </div>
+
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/statics/images/oreocheesecake.jpg" alt="Bánh Oreo Cheesecake">
+                <h3>Bánh Oreo Cheesecake</h3>
+            </div>
+
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/statics/images/cupcake.jpg" alt="Bánh Cupcake">
+                <h3>Bánh Cupcake</h3>
+            </div>
+
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/statics/images/matcha.jpg" alt="Trà Matcha">
+                <h3>Trà Matcha</h3>
+            </div>
+
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/statics/images/mangomousse.jpg" alt="Bánh Mousse Xoài">
+                <h3>Bánh Mousse Xoài</h3>
             </div>
         </div>
     </section>
 
     <section class="about">
-        <h2>Nên chọn chúng tôi</h2>
+        <h2>Vì sao nên chọn chúng tôi</h2>
         <div class="about-grid">
             <div class="about-item">
                 <h3>Nguyên liệu sạch</h3>
