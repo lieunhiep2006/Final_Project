@@ -287,6 +287,140 @@ body {
     font-size: 0.85rem;
     color: #8d99ae;
 }
+
+/* Authentication pages */
+.auth-page {
+    background: linear-gradient(135deg, #fefae0 0%, #faf9f6 55%, #f7d9c4 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    background: var(--white);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(59, 42, 32, 0.12);
+    padding: 2.25rem;
+    width: min(100%, 380px);
+}
+
+.auth-card-wide {
+    width: min(100%, 460px);
+}
+
+.auth-eyebrow {
+    color: var(--primary-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.auth-card h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--cherry);
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid #d8cfc5;
+    border-radius: 4px;
+    color: var(--text-dark);
+    font: inherit;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    outline: 2px solid rgba(224, 122, 95, 0.2);
+}
+
+.auth-card button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--cherry);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.auth-card button:hover {
+    background-color: var(--hover-color);
+}
+
+.auth-message {
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.8rem;
+}
+
+.auth-error {
+    background-color: #fff0ed;
+    color: #a8332a;
+}
+
+.auth-success {
+    background-color: #edf8ef;
+    color: #28733c;
+}
+
+.auth-links {
+    margin-top: 1.25rem;
+    display: grid;
+    gap: 0.8rem;
+}
+
+.secondary-link {
+    display: inline-block;
+    color: var(--text-dark);
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.secondary-link:hover {
+    color: var(--primary-color);
+}
+
+.auth-footer {
+    color: var(--text-dark);
+    font-size: 0.85rem;
+    text-align: center;
+    margin: 0;
+}
+
+.auth-footer a {
+    color: var(--cherry);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    color: var(--hover-color);
+}
 /*extra*/
 .featured-products {
   padding: 5rem 6%;
