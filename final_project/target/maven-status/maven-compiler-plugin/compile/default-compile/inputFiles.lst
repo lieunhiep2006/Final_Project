@@ -10,6 +10,7 @@
 /Users/lieuhongnhiep/Study/Web/Final_Project/final_project/src/main/java/com/bakershop/controller/CartController.java
 /Users/lieuhongnhiep/Study/Web/Final_Project/final_project/src/main/java/com/bakershop/model/OrderItem.java
 /Users/lieuhongnhiep/Study/Web/Final_Project/final_project/src/main/java/com/bakershop/model/CartItem.java
+/Users/lieuhongnhiep/Study/Web/Final_Project/final_project/src/main/java/com/bakershop/filter/CategoryFilter.java
 /Users/lieuhongnhiep/Study/Web/Final_Project/final_project/src/main/java/com/bakershop/controller/AuthController.java
 /Users/lieuhongnhiep/Study/Web/Final_Project/final_project/src/main/java/com/bakershop/controller/admin/AdminProductController.java
 /Users/lieuhongnhiep/Study/Web/Final_Project/final_project/src/main/java/com/bakershop/dao/CakeDAO.java

@@ -28,4 +28,16 @@ public class DBContext {
     public static Connection getConnection() throws Exception {
         return DriverManager.getConnection(url, user, password);
     }
+
+    public static void main(String[] args) {
+    try {
+        Connection conn = DBContext.getConnection();
+        if (conn != null) {
+            System.out.println("===> KẾT NỐI DATABASE THÀNH CÔNG!");
+        }
+    } catch (Exception e) {
+        System.out.println("===> LỖI KẾT NỐI:");
+        e.printStackTrace();
+    }
+}
 }

@@ -25,6 +25,7 @@ com/bakershop/dao/VoucherDAO.class
 com/bakershop/utils/CurrencyUtils.class
 com/bakershop/controller/CheckoutController.class
 com/bakershop/controller/HomeController.class
+com/bakershop/filter/CategoryFilter.class
 com/bakershop/model/OrderItem.class
 com/bakershop/model/Store.class
 com/bakershop/dao/OrderDAO.class
