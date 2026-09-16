@@ -35,6 +35,7 @@
                             <c:otherwise><span class="out-of-stock">Hết hàng</span></c:otherwise>
                         </c:choose>
                     </div>
+                    <a class="product-review-link" href="${pageContext.request.contextPath}/reviews?cakeId=${cake.id}">Xem đánh giá</a>
                 </div>
             </c:forEach>
         </div>

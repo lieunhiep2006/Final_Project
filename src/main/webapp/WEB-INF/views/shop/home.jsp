@@ -32,45 +32,13 @@
     <section class="featured-products">
         <h2>Bánh bán chạy nhất</h2>
         <div class="product-grid">
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/creampuffs.jpg" alt="Bánh su kem"> 
-                <h3>Bánh su kem</h3>
-            </div>
-
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/macarons.jpg" alt="Bánh Macaron">
-                <h3>Bánh Macaron</h3>
-            </div>
-
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/bluefudge.jpg" alt="Bánh Fudge việt quất">
-                <h3>Bánh Fudge việt quất</h3>
-            </div>
-
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/corncake.jpg" alt="Bánh ngô">
-                <h3>Bánh Ngô</h3>
-            </div>
-
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/oreocheesecake.jpg" alt="Bánh Oreo Cheesecake">
-                <h3>Bánh Oreo Cheesecake</h3>
-            </div>
-
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/cupcake.jpg" alt="Bánh Cupcake">
-                <h3>Bánh Cupcake</h3>
-            </div>
-
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/matcha.jpg" alt="Trà Matcha">
-                <h3>Trà Matcha</h3>
-            </div>
-
-            <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/mangomousse.jpg" alt="Bánh Mousse Xoài">
-                <h3>Bánh Mousse Xoài</h3>
-            </div>
+            <c:forEach var="cake" items="${cakeList}">
+                <div class="product-card">
+                    <img src="${pageContext.request.contextPath}/statics/images/${cake.localImageFile}" alt="${cake.name}">
+                    <h3>${cake.name}</h3>
+                    <p class="product-description">${cake.description}</p>
+                </div>
+            </c:forEach>
         </div>
     </section>
 

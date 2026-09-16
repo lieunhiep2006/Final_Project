@@ -14,17 +14,17 @@
     <ul class="baker-menu">
       <!-- Trang Chủ -->
       <li>
-        <a class="active" href="${pageContext.request.contextPath}/home">Trang chủ</a>
+        <a class="${pageContext.request.servletPath == '/home' ? 'active' : ''}" href="${pageContext.request.contextPath}/home">Trang chủ</a>
       </li>
 
         <!-- Giới Thiệu -->
       <li>
-        <a href="${pageContext.request.contextPath}/about">Giới thiệu</a>
+          <a class="${pageContext.request.servletPath == '/about' ? 'active' : ''}" href="${pageContext.request.contextPath}/about">Giới thiệu</a>
       </li>
 
       <!-- 2. Menu Danh Mục Bánh (Dropdown CSS) -->
       <li class="dropdown">
-        <a href="#">Thực đơn bánh <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i></a>
+        <a class="${pageContext.request.servletPath == '/products' ? 'active' : ''}" href="#">Thực đơn bánh <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i></a>
         <ul class="dropdown-menu">
           <li><a href="${pageContext.request.contextPath}/products">Tất cả bánh</a></li>
           
@@ -40,7 +40,7 @@
 
       <!-- 3. Địa Chỉ Cơ Sở -->
       <li>
-        <a href="${pageContext.request.contextPath}/stores">
+        <a class="${pageContext.request.servletPath == '/stores' ? 'active' : ''}" href="${pageContext.request.contextPath}/stores">
           <i class="fa-solid fa-location-dot" style="color: var(--primary-color);"></i> Cửa hàng
         </a>
       </li>

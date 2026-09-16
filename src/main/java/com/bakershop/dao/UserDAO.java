@@ -43,6 +43,19 @@ public class UserDAO {
 		}
 	}
 
+	public boolean updateProfile(User user) {
+		String sql = "UPDATE [User] SET full_name = ?, address = ? WHERE id = ?";
+		try (Connection connection = DBContext.getConnection();
+			 PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setString(1, user.getFullName());
+			statement.setString(2, user.getAddress());
+			statement.setInt(3, user.getId());
+			return statement.executeUpdate() == 1;
+		} catch (SQLException e) {
+			throw new RuntimeException("Unable to update user profile", e);
+		}
+	}
+
 	private User mapUser(ResultSet resultSet) throws SQLException {
 		User user = new User();
 		user.setId(resultSet.getInt("id"));
