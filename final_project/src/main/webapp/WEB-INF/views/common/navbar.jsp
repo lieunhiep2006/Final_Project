@@ -40,7 +40,7 @@
 
       <!-- 3. Địa Chỉ Cơ Sở -->
       <li>
-        <a href="${pageContext.request.contextPath}/stores">
+        <a href="${pageContext.request.contextPath}/store">
           <i class="fa-solid fa-location-dot" style="color: var(--primary-color);"></i> Cửa hàng
         </a>
       </li>
@@ -78,7 +78,11 @@
               <li><a href="${pageContext.request.contextPath}/profile">Thông tin tài khoản</a></li>
               <li><a href="${pageContext.request.contextPath}/orders">Đơn hàng của tôi</a></li>
               <c:if test="${sessionScope.user.role == 'ADMIN'}">
-                <li><a href="${pageContext.request.contextPath}/admin/dashboard" style="color: var(--hover-color);">Trang Quản Trị</a></li>
+                  <li>
+                      <a href="${pageContext.request.contextPath}/admin/dashboard">
+                          <i class="fa-solid fa-gauge"></i> Dashboard
+                      </a>
+                  </li>
               </c:if>
               <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
             </ul>

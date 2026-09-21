@@ -22,15 +22,15 @@ public class User {
         return id;
     }
 
-    public String getFull_name() {
+    public String getFullName() {
         return full_name;
     }
 
-    public String getPhone_number() {
+    public String getPhoneNumber() {
         return phone_number;
     }
 
-    public String getPassword_hash() {
+    public String getPasswordHash() {
         return password_hash;
     }
 
@@ -46,15 +46,15 @@ public class User {
         this.id = id;
     }
 
-    public void setFull_name(String full_name) {
+    public void setFullName(String full_name) {
         this.full_name = full_name;
     }
 
-    public void setPhone_number(String phone_number) {
+    public void setPhoneNumber(String phone_number) {
         this.phone_number = phone_number;
     }
 
-    public void setPassword_hash(String password_hash) {
+    public void setPasswordHash(String password_hash) {
         this.password_hash = password_hash;
     }
 
