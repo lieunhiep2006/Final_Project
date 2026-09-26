@@ -22,7 +22,11 @@
 				<p class="eyebrow">Bắt đầu cùng BakerShop</p>
 				<h2>Tạo tài khoản</h2>
 				<p class="auth-intro">Điền thông tin để trở thành thành viên.</p>
-				<c:if test="${not empty error}"><p class="auth-message">${error}</p></c:if>
+				<c:if test="${not empty error}">
+                    <p class="auth-message" style="color: #d32f2f; background-color: #fdeded; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+                        ${error}
+                    </p>
+                </c:if>
 				<form class="auth-form" action="${pageContext.request.contextPath}/register" method="post">
 					<label for="register-name">Họ và tên</label>
 					<div class="auth-input"><i class="fa-regular fa-id-card"></i><input id="register-name" type="text" name="fullName" autocomplete="name" required></div>

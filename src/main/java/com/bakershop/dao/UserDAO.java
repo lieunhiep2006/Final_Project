@@ -1,69 +1,115 @@
 package com.bakershop.dao;
 
-import com.bakershop.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import com.bakershop.model.User;
+
+
+import com.bakershop.utils.PasswordUtils;
 
 public class UserDAO {
-	private static final String USER_COLUMNS = "id, full_name, phone_number, password_hash, address, role";
+    public boolean updateProfile(User user) {
+        String sql = "UPDATE [User] SET full_name = ?, phone_number = ?, address = ? WHERE id = ?";
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getPhoneNumber());
+            ps.setString(3, user.getAddress());
+            ps.setLong(4, user.getId());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
-	public User findByPhoneNumber(String phoneNumber) {
-		String sql = "SELECT " + USER_COLUMNS + " FROM [User] WHERE phone_number = ?";
-		try (Connection connection = DBContext.getConnection();
-			 PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, phoneNumber);
-			try (ResultSet resultSet = statement.executeQuery()) {
-				if (resultSet.next()) {
-					return mapUser(resultSet);
-				}
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("Unable to find user", e);
-		}
-		return null;
-	}
+    public void updateUser(Long Id, String fullName, String phoneNumber, String address) {
+        String sql = "Update [User] set full_name = ?, phone_number = ?, address = ? where id = ?";
+        try(Connection conn = DBContext.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, fullName);
+            ps.setString(2, phoneNumber);
+            ps.setString(3, address);
+            ps.setLong(4, Id);
 
-	public boolean create(User user) {
-		String sql = "INSERT INTO [User] (full_name, phone_number, password_hash, address, role) VALUES (?, ?, ?, ?, ?)";
-		try (Connection connection = DBContext.getConnection();
-			 PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, user.getFullName());
-			statement.setString(2, user.getPhoneNumber());
-			statement.setString(3, user.getPasswordHash());
-			statement.setString(4, user.getAddress());
-			statement.setString(5, user.getRole());
-			return statement.executeUpdate() == 1;
-		} catch (SQLException e) {
-			if (e.getErrorCode() == 2627 || e.getErrorCode() == 2601) {
-				return false;
-			}
-			throw new RuntimeException("Unable to create user", e);
-		}
-	}
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	public boolean updateProfile(User user) {
-		String sql = "UPDATE [User] SET full_name = ?, address = ? WHERE id = ?";
-		try (Connection connection = DBContext.getConnection();
-			 PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, user.getFullName());
-			statement.setString(2, user.getAddress());
-			statement.setInt(3, user.getId());
-			return statement.executeUpdate() == 1;
-		} catch (SQLException e) {
-			throw new RuntimeException("Unable to update user profile", e);
-		}
-	}
+    public User getUserById(Long Id) {
+        String sql = "select * from [User] where id = ?";
+        try(Connection conn = DBContext.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, Id);
+            try(ResultSet rs = ps.executeQuery()) {
+                if(rs.next()) {
+                    return new User(
+                            rs.getLong("id"),
+                            rs.getString("full_name"),
+                            rs.getString("phone_number"),
+                            rs.getString("password_hash"),
+                            rs.getString("address"),
+                            rs.getString("role")
+                        );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	private User mapUser(ResultSet resultSet) throws SQLException {
-		User user = new User();
-		user.setId(resultSet.getInt("id"));
-		user.setFullName(resultSet.getString("full_name"));
-		user.setPhoneNumber(resultSet.getString("phone_number"));
-		user.setPasswordHash(resultSet.getString("password_hash"));
-		user.setAddress(resultSet.getString("address"));
-		user.setRole(resultSet.getString("role"));
-		return user;
-	}
+
+    public User getUserByPhoneNumber(String phoneNumber) {
+        String sql = "select * from [user] u where u.phone_number = ?";
+        try(Connection conn = DBContext.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, phoneNumber);
+                try(ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        return new User(
+                            rs.getLong("id"),
+                            rs.getString("full_name"),
+                            rs.getString("phone_number"),
+                            rs.getString("password_hash"),
+                            rs.getString("address"),
+                            rs.getString("role")
+                        );
+                    }
+                }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public User login(String phoneNumber, String password) {
+        User user = getUserByPhoneNumber(phoneNumber);
+        if(user != null && PasswordUtils.checkPassword(password, user.getPasswordHash())) {
+            return user;
+        }
+        
+        return null;
+    }
+
+    public boolean register(User user) {
+        String sql = "Insert into [User] (full_name, phone_number, password_hash, address, role) values (?,?,?,?, 'CUSTOMER')";
+        try(Connection conn = DBContext.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getPhoneNumber());
+            ps.setString(3, PasswordUtils.hashPassword(user.getPasswordHash()));
+            ps.setString(4, user.getAddress());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 }

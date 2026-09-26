@@ -1,8 +1,10 @@
 package com.bakershop.controller;
 
+import com.bakershop.dao.CartDAO;
 import com.bakershop.dao.OrderDAO;
 import com.bakershop.dao.StoreDAO;
 import com.bakershop.dao.VoucherDAO;
+import com.bakershop.model.Cart;
 import com.bakershop.model.CartItem;
 import com.bakershop.model.User;
 import com.bakershop.model.Voucher;
@@ -18,11 +20,11 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = { "/checkout", "/checkout-success" })
 public class CheckoutController extends HttpServlet {
-	private static final String CART_ATTRIBUTE = "cartItems";
 	private static final String VOUCHER_ATTRIBUTE = "checkoutVoucher";
 	private final VoucherDAO voucherDAO = new VoucherDAO();
 	private final StoreDAO storeDAO = new StoreDAO();
 	private final OrderDAO orderDAO = new OrderDAO();
+	private final CartDAO cartDAO = new CartDAO();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +38,7 @@ public class CheckoutController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
-		List<CartItem> cartItems = getCart(request.getSession(true));
+		List<CartItem> cartItems = getCart(user);
 		if (cartItems.isEmpty()) {
 			response.sendRedirect(request.getContextPath() + "/cart");
 			return;
@@ -68,7 +70,7 @@ public class CheckoutController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
-		List<CartItem> cartItems = getCart(session);
+		List<CartItem> cartItems = getCart(user);
 		double subtotal = getSubtotal(cartItems);
 		if (cartItems.isEmpty()) {
 			response.sendRedirect(request.getContextPath() + "/cart");
@@ -111,16 +113,18 @@ public class CheckoutController extends HttpServlet {
 		double discount = getDiscount(voucher, subtotal);
 		long orderId = orderDAO.createOrder(user.getId(), storeId, address, phone, cartItems,
 				voucher, subtotal, discount, subtotal - discount);
-		session.removeAttribute(CART_ATTRIBUTE);
+		Cart cart = cartDAO.getOrCreateCartByUserId(user.getId());
+		if (cart != null) {
+			cartDAO.clearCart(cart.getId());
+		}
 		session.removeAttribute(VOUCHER_ATTRIBUTE);
 		session.setAttribute("lastOrderId", orderId);
 		response.sendRedirect(request.getContextPath() + "/checkout-success");
 	}
 
-	@SuppressWarnings("unchecked")
-	private List<CartItem> getCart(HttpSession session) {
-		Object value = session.getAttribute(CART_ATTRIBUTE);
-		return value instanceof List<?> ? (List<CartItem>) value : new ArrayList<>();
+	private List<CartItem> getCart(User user) {
+		Cart cart = cartDAO.getOrCreateCartByUserId(user.getId());
+		return cart == null ? new ArrayList<>() : cart.getItems();
 	}
 
 	private double getSubtotal(List<CartItem> cartItems) {

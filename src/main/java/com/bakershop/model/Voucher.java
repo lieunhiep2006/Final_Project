@@ -1,32 +1,53 @@
 package com.bakershop.model;
-
+import java.sql.Date;
 public class Voucher {
-	private long id;
+	private Long id;
 	private String code;
 	private String discountType;
-	private double discountValue;
-	private double minOrderAmount;
+	private Double discountValue;
+	private Double minOrderAmount;
 	private Double maxDiscountAmount;
-	private Integer usageLimit;
-	private java.sql.Date startDate;
-	private java.sql.Date endDate;
+	private int usageLimit;
+	private Date startDate;
+	private Date endDate;
 
-	public long getId() { return id; }
-	public void setId(long id) { this.id = id; }
+    public Voucher() {}
+    public Voucher(Long id, String code, String discountType, Double discountValue, Double minOrderAmout, Double maxDiscountAmout, int usageLimit, Date startDate, Date endDate) {
+        this.id = id;
+        this.code = code;
+        this.discountType = discountType;
+        this.discountValue = discountValue;
+        this.minOrderAmount = minOrderAmout;
+        this.maxDiscountAmount = maxDiscountAmout;
+        this.usageLimit = usageLimit;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+	public Long getId() { return id; }
+	public void setId(Long id) { this.id = id; }
+
 	public String getCode() { return code; }
 	public void setCode(String code) { this.code = code; }
+
 	public String getDiscountType() { return discountType; }
 	public void setDiscountType(String discountType) { this.discountType = discountType; }
-	public double getDiscountValue() { return discountValue; }
-	public void setDiscountValue(double discountValue) { this.discountValue = discountValue; }
-	public double getMinOrderAmount() { return minOrderAmount; }
-	public void setMinOrderAmount(double minOrderAmount) { this.minOrderAmount = minOrderAmount; }
+
+	public Double getDiscountValue() { return discountValue; }
+	public void setDiscountValue(Double discountValue) { this.discountValue = discountValue; }
+
+	public Double getMinOrderAmount() { return minOrderAmount; }
+	public void setMinOrderAmount(Double minOrderAmount) { this.minOrderAmount = minOrderAmount; }
+
 	public Double getMaxDiscountAmount() { return maxDiscountAmount; }
 	public void setMaxDiscountAmount(Double maxDiscountAmount) { this.maxDiscountAmount = maxDiscountAmount; }
-	public Integer getUsageLimit() { return usageLimit; }
-	public void setUsageLimit(Integer usageLimit) { this.usageLimit = usageLimit; }
-	public java.sql.Date getStartDate() { return startDate; }
-	public void setStartDate(java.sql.Date startDate) { this.startDate = startDate; }
-	public java.sql.Date getEndDate() { return endDate; }
-	public void setEndDate(java.sql.Date endDate) { this.endDate = endDate; }
+
+	public int getUsageLimit() { return usageLimit; }
+	public void setUsageLimit(int usageLimit) { this.usageLimit = usageLimit; }
+
+	public Date getStartDate() { return startDate; }
+	public void setStartDate(Date startDate) { this.startDate = startDate; }
+
+	public Date getEndDate() { return endDate; }
+	public void setEndDate(Date endDate) { this.endDate = endDate; }
 }

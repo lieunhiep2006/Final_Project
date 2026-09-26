@@ -11,9 +11,9 @@ import java.util.List;
 public class ReviewDAO {
 	public List<Review> findByCakeId(int cakeId) {
 		List<Review> reviews = new ArrayList<>();
-		String sql = "SELECT r.id, r.user_id, r.cake_id, r.rating, r.comment, u.full_name "
-				+ "FROM review r JOIN [user] u ON u.id = r.user_id "
-				+ "WHERE r.cake_id = ? ORDER BY r.id DESC";
+		String sql = "select r.id, r.user_id, r.cake_id, r.rating, r.comment, u.full_name "
+				+ "from review r join [user] u on u.id = r.user_id "
+				+ "where r.cake_id = ? order by r.id DESC";
 		try (Connection connection = DBContext.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setInt(1, cakeId);
@@ -22,7 +22,7 @@ public class ReviewDAO {
 					reviews.add(map(result));
 				}
 			}
-		} catch (SQLException exception) {
+		} catch (Exception exception) {
 			throw new IllegalStateException("Unable to load reviews", exception);
 		}
 		return reviews;
@@ -33,11 +33,11 @@ public class ReviewDAO {
 		try (Connection connection = DBContext.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setLong(1, review.getUserId());
-			statement.setInt(2, review.getCakeId());
+			statement.setLong(2, review.getCakeId());
 			statement.setDouble(3, review.getRating());
 			statement.setString(4, review.getComment());
 			statement.executeUpdate();
-		} catch (SQLException exception) {
+		} catch (Exception exception) {
 			throw new IllegalStateException("Unable to save review", exception);
 		}
 	}
@@ -46,7 +46,7 @@ public class ReviewDAO {
 		Review review = new Review();
 		review.setId(result.getLong("id"));
 		review.setUserId(result.getLong("user_id"));
-		review.setCakeId(result.getInt("cake_id"));
+		review.setCakeId(result.getLong("cake_id"));
 		review.setReviewerName(result.getString("full_name"));
 		review.setRating(result.getDouble("rating"));
 		review.setComment(result.getString("comment"));

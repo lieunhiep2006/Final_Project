@@ -1,35 +1,43 @@
 package com.bakershop.dao;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.io.InputStream;
 import java.util.Properties;
+
 public class DBContext {
-    private static Properties props = new Properties();
+    private static String driver;
+    private static String url;
+    private static String user;
+    private static String password;
     static {
-        try (InputStream input = DBContext.class.getClassLoader()
-                .getResourceAsStream("db.properties")) {
-            if (input == null) {
-                throw new RuntimeException("db.properties not found in classpath");
-            }
-            props.load(input);
-            Class.forName(props.getProperty("db.driver"));
+        try(InputStream input = DBContext.class.getClassLoader().getResourceAsStream("db.properties")) {
+            Properties prop = new Properties();
+            
+            prop.load(input);
+            driver = prop.getProperty("db.driver");
+            url = prop.getProperty("db.url");
+            user = prop.getProperty("db.user");
+            password = prop.getProperty("db.password");
 
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException("Failed to load DB configuration", e);
+            Class.forName(driver);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
-    public static Connection getConnection() throws SQLException {
-        String url = props.getProperty("db.url");
-        String user = props.getProperty("db.user");
-        String password = props.getProperty("db.password");
-
-        if (user != null && !user.isBlank() && password != null) {
-            return DriverManager.getConnection(url, user, password);
-        }
-
-        return DriverManager.getConnection(url);
+    public static Connection getConnection() throws Exception {
+        return DriverManager.getConnection(url, user, password);
     }
+
+    public static void main(String[] args) {
+    try {
+        Connection conn = DBContext.getConnection();
+        if (conn != null) {
+            System.out.println("===> KẾT NỐI DATABASE THÀNH CÔNG!");
+        }
+    } catch (Exception e) {
+        System.out.println("===> LỖI KẾT NỐI:");
+        e.printStackTrace();
+    }
+}
 }

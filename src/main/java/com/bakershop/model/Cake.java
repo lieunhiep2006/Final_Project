@@ -1,60 +1,82 @@
 package com.bakershop.model;
 
 public class Cake {
-    private int id;
+    private Long id;
     private String name;
     private String description;
     private Double price;
     private int stockQuantity;
-    private int categoryId;
+    private Long categoryId;
+    private String imageUrl;
 
-    public Cake(){
 
+    public Cake() {}
+
+
+    public Cake(Long id, String name, String description, Double price, int stockQuantity, Long categoryId, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.categoryId = categoryId;
+        this.imageUrl = imageUrl;
     }
-    public int getId(){
+
+
+    public Long getId() {
         return id;
     }
-    public void setId(int id){
-        this.id=id;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public void setName(String name){
-        this.name=name;
+
+    public void setName(String name) {
+        this.name = name;
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return description;
     }
-    public void setDescription(String description){
-        this.description=description;
+
+    public void setDescription(String description) {
+        this.description = description;
     }
-    public Double getPrice(){
+
+    public Double getPrice() {
         return price;
     }
-    public void setPrice(Double price){
-        this.price=price;
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
-    public int getStockQuantity(){
+
+    public int getStockQuantity() {
         return stockQuantity;
     }
-    public void setStockQuantity(int stockQuantity){
-        this.stockQuantity=stockQuantity;
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
-    public int getCategoryId(){
+
+    public Long getCategoryId() {
         return categoryId;
     }
-    public void setCategoryId(int categoryId){
-        this.categoryId=categoryId;
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
-    public String getLocalImageFile(){
-        String[] images = {
-            "strawberrymousse.jpg", "brownies.jpg", "mangomousse.jpg", "cupcake.jpg",
-            "bluefudge.jpg", "creampuffs.jpg", "matcha.jpg", "corncake.jpg",
-            "lemoncheesecake.jpg", "mangomousse.jpg", "oreocheesecake.jpg",
-            "basquecheesecake.jpg", "lemoncheesecake.jpg", "oreocheesecake.jpg",
-            "cupcake.jpg"
-        };
-        return id > 0 && id <= images.length ? images[id - 1] : "bakery1.jpg";
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

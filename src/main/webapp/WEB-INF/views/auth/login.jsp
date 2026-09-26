@@ -22,8 +22,19 @@
 				<p class="eyebrow">Tài khoản BakerShop</p>
 				<h2>Đăng nhập</h2>
 				<p class="auth-intro">Chào mừng bạn quay trở lại.</p>
-				<c:if test="${param.registered == 'true'}"><p class="auth-success">Tạo tài khoản thành công. Hãy đăng nhập.</p></c:if>
-				<c:if test="${not empty error}"><p class="auth-message">${error}</p></c:if>
+				<c:if test="${not empty sessionScope.authSuccess}">
+                    <p class="auth-success" style="color: #2e7d32; background-color: #edf7ed; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+                        ${sessionScope.authSuccess}
+                    </p>
+                    <%-- Xóa thông báo khỏi Session ngay sau khi hiển thị --%>
+                    <c:remove var="authSuccess" scope="session" />
+                </c:if>
+
+                <c:if test="${not empty error}">
+                    <p class="auth-message" style="color: #d32f2f; background-color: #fdeded; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+                        ${error}
+                    </p>
+                </c:if>
 				<form class="auth-form" action="${pageContext.request.contextPath}/login" method="post">
 					<label for="login-phone">Số điện thoại</label>
 					<div class="auth-input"><i class="fa-solid fa-phone"></i><input id="login-phone" type="tel" name="phoneNumber" autocomplete="tel" required></div>

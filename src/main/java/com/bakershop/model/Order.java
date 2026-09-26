@@ -14,6 +14,7 @@ public class Order {
 	private String status;
 	private String paymentStatus;
 	private String voucherCode;
+	private Long voucherId;
 	private java.util.List<OrderItem> items = new java.util.ArrayList<>();
 	public long getId() { return id; }
 	public void setId(long id) { this.id = id; }
@@ -41,6 +42,21 @@ public class Order {
 	public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
 	public String getVoucherCode() { return voucherCode; }
 	public void setVoucherCode(String voucherCode) { this.voucherCode = voucherCode; }
+	public Long getVoucherId() { return voucherId; }
+	public void setVoucherId(Long voucherId) { this.voucherId = voucherId; }
+	public void setVoucherId(long voucherId) { this.voucherId = voucherId; }
 	public java.util.List<OrderItem> getItems() { return items; }
 	public void setItems(java.util.List<OrderItem> items) { this.items = items; }
+	public String getStatusLabel() {
+    if (status == null) return "";
+    switch (status) {
+        case "PENDING": return "Chờ xử lý";
+        case "CONFIRMED": return "Đã xác nhận";
+        case "PREPARING": return "Đang chuẩn bị";
+        case "DELIVERING": return "Đang giao hàng";
+        case "COMPLETED": return "Hoàn thành";
+        case "CANCELLED": return "Đã hủy";
+        default: return status;
+    }
+}
 }

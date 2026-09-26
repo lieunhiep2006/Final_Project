@@ -14,17 +14,17 @@
     <ul class="baker-menu">
       <!-- Trang Chủ -->
       <li>
-        <a class="${pageContext.request.servletPath == '/home' ? 'active' : ''}" href="${pageContext.request.contextPath}/home">Trang chủ</a>
+        <a class="active" href="${pageContext.request.contextPath}/home">Trang chủ</a>
       </li>
 
         <!-- Giới Thiệu -->
       <li>
-          <a class="${pageContext.request.servletPath == '/about' ? 'active' : ''}" href="${pageContext.request.contextPath}/about">Giới thiệu</a>
+        <a href="${pageContext.request.contextPath}/about">Giới thiệu</a>
       </li>
 
       <!-- 2. Menu Danh Mục Bánh (Dropdown CSS) -->
       <li class="dropdown">
-        <a class="${pageContext.request.servletPath == '/products' ? 'active' : ''}" href="#">Thực đơn bánh <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i></a>
+        <a href="#">Thực đơn bánh <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i></a>
         <ul class="dropdown-menu">
           <li><a href="${pageContext.request.contextPath}/products">Tất cả bánh</a></li>
           
@@ -40,7 +40,7 @@
 
       <!-- 3. Địa Chỉ Cơ Sở -->
       <li>
-        <a class="${pageContext.request.servletPath == '/stores' ? 'active' : ''}" href="${pageContext.request.contextPath}/stores">
+        <a href="${pageContext.request.contextPath}/store">
           <i class="fa-solid fa-location-dot" style="color: var(--primary-color);"></i> Cửa hàng
         </a>
       </li>
@@ -78,7 +78,11 @@
               <li><a href="${pageContext.request.contextPath}/profile">Thông tin tài khoản</a></li>
               <li><a href="${pageContext.request.contextPath}/orders">Đơn hàng của tôi</a></li>
               <c:if test="${sessionScope.user.role == 'ADMIN'}">
-                <li><a href="${pageContext.request.contextPath}/admin/dashboard" style="color: var(--hover-color);">Trang Quản Trị</a></li>
+                  <li>
+                      <a href="${pageContext.request.contextPath}/admin/dashboard">
+                          <i class="fa-solid fa-gauge"></i> Dashboard
+                      </a>
+                  </li>
               </c:if>
               <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
             </ul>

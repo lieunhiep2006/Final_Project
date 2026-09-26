@@ -1,121 +1,99 @@
 package com.bakershop.controller;
 
-import com.bakershop.dao.CakeDAO;
+import com.bakershop.dao.CartDAO;
+import com.bakershop.model.Cart;
 import com.bakershop.model.CartItem;
-import com.bakershop.model.Cake;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.bakershop.model.User;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import java.io.IOException;
 
 @WebServlet("/cart")
 public class CartController extends HttpServlet {
-	private static final String CART_ATTRIBUTE = "cartItems";
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CartItem> cartItems = getCart(request.getSession(true));
-		updateCartCount(request.getSession());
-		request.setAttribute("cartItems", cartItems);
-		request.setAttribute("cartTotal", getCartTotal(cartItems));
-		request.getRequestDispatcher("/WEB-INF/views/shop/cart.jsp").forward(request, response);
-	}
+    private CartDAO cartDAO;
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		request.setCharacterEncoding("UTF-8");
-		String action = request.getParameter("action");
-		if ("remove".equals(action)) {
-			removeItem(request);
-		} else if ("update".equals(action)) {
-			updateItem(request);
-		} else if ("clear".equals(action)) {
-			getCart(request.getSession(true)).clear();
-			updateCartCount(request.getSession());
-		} else {
-			addItem(request);
-		}
-		response.sendRedirect(request.getContextPath() + "/cart");
-	}
+    @Override
+    public void init() {
+        cartDAO = new CartDAO();
+    }
 
-	@SuppressWarnings("unchecked")
-	private List<CartItem> getCart(HttpSession session) {
-		Object value = session.getAttribute(CART_ATTRIBUTE);
-		if (value instanceof List<?>) {
-			return (List<CartItem>) value;
-		}
-		List<CartItem> cart = new ArrayList<>();
-		session.setAttribute(CART_ATTRIBUTE, cart);
-		return cart;
-	}
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
-	private void addItem(HttpServletRequest request) throws ServletException {
-		int cakeId = parsePositiveInt(request.getParameter("cakeId"));
-		int quantity = parsePositiveInt(request.getParameter("quantity"));
-		Cake cake = new CakeDAO().findById(cakeId);
-		if (cake == null || cake.getStockQuantity() < quantity) {
-			request.getSession(true).setAttribute("cartError", "Sản phẩm không tồn tại hoặc không đủ số lượng.");
-			return;
-		}
-		List<CartItem> cart = getCart(request.getSession(true));
-		for (CartItem item : cart) {
-			if (item.getCake().getId() == cakeId) {
-				item.setQuantity(Math.min(item.getQuantity() + quantity, cake.getStockQuantity()));
-				updateCartCount(request.getSession());
-				return;
-			}
-		}
-		cart.add(new CartItem(cake, quantity));
-		updateCartCount(request.getSession());
-	}
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
 
-	private void updateItem(HttpServletRequest request) throws ServletException {
-		int cakeId = parsePositiveInt(request.getParameter("cakeId"));
-		int quantity = parsePositiveInt(request.getParameter("quantity"));
-		Cake cake = new CakeDAO().findById(cakeId);
-		List<CartItem> cart = getCart(request.getSession(true));
-		for (CartItem item : cart) {
-			if (item.getCake().getId() == cakeId) {
-				if (cake == null || cake.getStockQuantity() < quantity) {
-					request.getSession().setAttribute("cartError", "Số lượng sản phẩm không đủ trong kho.");
-					return;
-				}
-				item.setCake(cake);
-				item.setQuantity(quantity);
-				updateCartCount(request.getSession());
-				return;
-			}
-		}
-		request.getSession().setAttribute("cartError", "Sản phẩm không có trong giỏ hàng.");
-	}
+        Cart cart = cartDAO.getOrCreateCartByUserId(user.getId());
+        double total = 0.0;
+        for (CartItem item : cart.getItems()) {
+            total += item.getLineTotal();
+        }
 
-	private void removeItem(HttpServletRequest request) throws ServletException {
-		int cakeId = parsePositiveInt(request.getParameter("cakeId"));
-		getCart(request.getSession(true)).removeIf(item -> item.getCake().getId() == cakeId);
-		updateCartCount(request.getSession());
-	}
+        request.setAttribute("cartItems", cart.getItems());
+        request.setAttribute("cartTotal", total);
 
-	private int parsePositiveInt(String value) throws ServletException {
-		try {
-			int number = Integer.parseInt(value);
-			if (number > 0) {
-				return number;
-			}
-		} catch (NumberFormatException | NullPointerException ignored) { }
-		throw new ServletException("Invalid cart value");
-	}
 
-	private double getCartTotal(List<CartItem> cart) {
-		return cart.stream().mapToDouble(item -> item.getCake().getPrice() * item.getQuantity()).sum();
-	}
+        request.getRequestDispatcher("/WEB-INF/views/shop/cart.jsp").forward(request, response);
+    }
 
-	private void updateCartCount(HttpSession session) {
-		int count = getCart(session).stream().mapToInt(CartItem::getQuantity).sum();
-		session.setAttribute("cartCount", count);
-	}
+    
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws IOException {
+        
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        Cart cart = cartDAO.getOrCreateCartByUserId(user.getId());
+        String action = request.getParameter("action");
+
+        try {
+            if ("add".equals(action)) {
+                long cakeId = Long.parseLong(request.getParameter("cakeId"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                String size = request.getParameter("size");
+                String note = request.getParameter("note");
+                
+                if (size == null || size.trim().isEmpty()) size = "M";
+                cartDAO.addOrUpdateItem(cart.getId(), cakeId, size, quantity, note);
+
+            } else if ("update".equals(action)) {
+                long itemId = Long.parseLong(request.getParameter("itemId"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                String note = request.getParameter("note");
+                String size = request.getParameter("size");
+
+                cartDAO.updateCartItem(itemId, quantity, note, size);
+            } else if ("remove".equals(action)) {
+                long itemId = Long.parseLong(request.getParameter("itemId"));
+                cartDAO.removeItem(itemId);
+
+            } else if ("clear".equals(action)) {
+                cartDAO.clearCart(cart.getId());
+            }
+        } catch (Exception e) {
+            session.setAttribute("cartError", "Lỗi cartController");
+            e.printStackTrace();
+        }
+
+        response.sendRedirect(request.getContextPath() + "/cart");
+    }
 }

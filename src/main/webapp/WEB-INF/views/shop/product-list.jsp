@@ -1,5 +1,6 @@
 <%@ page isELIgnored="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -11,22 +12,23 @@
 
     <section class="featured-products product-list-page">
         <p class="cart-eyebrow">Fresh from the oven</p>
-        <h1>Tất cả bánh</h1>
-        <p class="product-list-intro">Chọn món bánh yêu thích và thêm vào giỏ hàng để đặt nhanh hơn.</p>
+        <h1>${empty category.name ? 'Tất cả bánh' : category.name}</h1>
+        <p class="product-list-intro">${empty category.description ? 'Chọn món bánh yêu thích và thêm vào giỏ hàng để đặt nhanh hơn.' : category.description}</p>
         <div class="product-grid">
-            <c:forEach var="cake" items="${cakeList}">
+            <c:forEach var="cake" items="${cakes}">
                 <div class="product-card">
-                    <img src="${pageContext.request.contextPath}/statics/images/${cake.localImageFile}" alt="${cake.name}">
+                    <img src="${cake.imageUrl}" alt="${cake.name}">
                     <h3>${cake.name}</h3>
                     <p class="product-description">${cake.description}</p>
                     <div class="product-card-footer">
                         <div>
-                            <p class="product-price">${cake.price} đ</p>
+                            <p class="product-price"><fmt:formatNumber value="${cake.price}" type="currency" currencySymbol="₫" maxFractionDigits="0"/></p>
                             <small class="product-stock">Còn ${cake.stockQuantity} sản phẩm</small>
                         </div>
                         <c:choose>
                             <c:when test="${cake.stockQuantity > 0}">
                                 <form action="${pageContext.request.contextPath}/cart" method="post">
+                                    <input type="hidden" name="action" value="add">
                                     <input type="hidden" name="cakeId" value="${cake.id}">
                                     <input type="hidden" name="quantity" value="1">
                                     <button class="add-to-cart-btn" type="submit" title="Thêm vào giỏ hàng" aria-label="Thêm ${cake.name} vào giỏ hàng"><i class="fa-solid fa-cart-plus"></i></button>

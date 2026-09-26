@@ -50,8 +50,8 @@ public class ReviewController extends HttpServlet {
 		}
 		Review review = new Review();
 		review.setUserId(user.getId());
-		review.setCakeId(cakeId);
-		review.setRating(rating);
+		review.setCakeId((long) cakeId);
+		review.setRating((double) rating);
 		review.setComment(comment.trim());
 		reviewDAO.create(review);
 		response.sendRedirect(request.getContextPath() + "/reviews?cakeId=" + cakeId + "&success=true");

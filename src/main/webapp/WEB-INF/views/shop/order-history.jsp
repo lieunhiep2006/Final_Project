@@ -1,5 +1,6 @@
 <%@ page isELIgnored="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -29,13 +30,13 @@
 						<article class="order-history-card">
 							<header class="order-history-header">
 								<div><strong>Đơn hàng #${order.id}</strong><span>${order.storeName}</span></div>
-								<div class="order-status">${order.status}</div>
+								<div class="order-status">${order.statusLabel}</div>
 							</header>
 							<div class="order-items-list">
 								<c:forEach var="item" items="${order.items}">
 									<div class="order-history-item">
 										<span>${item.cakeName} x ${item.quantity}</span>
-										<strong>${item.lineTotal} đ</strong>
+										<strong><fmt:formatNumber value="${item.lineTotal}" pattern="#,###" /> đ</strong>
 									</div>
 								</c:forEach>
 							</div>
@@ -44,7 +45,7 @@
 								<span>Thanh toán: ${order.paymentStatus}</span>
 								<c:if test="${not empty order.voucherCode}"><span>Voucher: ${order.voucherCode}</span></c:if>
 							</div>
-							<div class="order-history-total"><span>Tổng cộng</span><strong>${order.totalAmount} đ</strong></div>
+							<div class="order-history-total"><span>Tổng cộng</span><strong><fmt:formatNumber value="${order.totalAmount}" pattern="#,###" /> đ</strong></div>
 						</article>
 					</c:forEach>
 				</section>

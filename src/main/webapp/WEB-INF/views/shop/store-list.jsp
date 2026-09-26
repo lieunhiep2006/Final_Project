@@ -14,7 +14,7 @@
         <div class="about-grid">
             <c:forEach var="store" items="${storeList}">
                 <article class="about-item store-card">
-                    <img src="${pageContext.request.contextPath}/statics/images/bakery1.jpg" alt="${store.name}">
+                    <img src="${store.imageUrl}" alt="${store.name}">
                     <div class="store-card-content">
                         <h3>${store.name}</h3>
                         <p><strong>Địa chỉ:</strong> ${store.address}</p>

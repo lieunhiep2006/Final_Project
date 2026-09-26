@@ -1,5 +1,6 @@
 <%@ page isELIgnored="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -32,23 +33,33 @@
 					<section class="cart-items" aria-label="Các sản phẩm trong giỏ hàng">
 						<c:forEach var="item" items="${cartItems}">
 							<article class="cart-item">
-								<img src="${pageContext.request.contextPath}/statics/images/${item.cake.localImageFile}" alt="${item.cake.name}">
+								<img src="${item.cake.imageUrl}" alt="${item.cake.name}">
 								<div class="cart-item-info">
 									<h2>${item.cake.name}</h2>
 									<p>${item.cake.description}</p>
 									<form class="cart-quantity-form" action="${pageContext.request.contextPath}/cart" method="post">
 										<input type="hidden" name="action" value="update">
-										<input type="hidden" name="cakeId" value="${item.cake.id}">
-										<label for="quantity-${item.cake.id}">Số lượng</label>
-										<input id="quantity-${item.cake.id}" type="number" name="quantity" value="${item.quantity}" min="1" max="${item.cake.stockQuantity}">
+										<input type="hidden" name="itemId" value="${item.id}">
+										<div class="form-group">
+											<label for="quantity-${item.id}">Số lượng:</label>
+											<input id="quantity-${item.id}" type="number" name="quantity" value="${item.quantity}" min="1" max="${item.cake.stockQuantity}">
+										</div>
+										<div class="form-group cart-note-group">
+											<label for="note-${item.id}">Ghi chú:</label>
+											<input id="note-${item.id}" type="text" name="note" value="${item.note}" placeholder="VD: Bớt ngọt, viết chữ Happy Birthday...">
+										</div>
+										<div class="form-group cart-size-group">
+											<label for="size-${item.id}">Size:</label>
+											<input id="size-${item.id}" type="text" name="size" value="${item.size}">
+										</div>
 										<button type="submit">Cập nhật</button>
 									</form>
 								</div>
 								<div class="cart-item-actions">
-									<strong class="cart-line-total">${item.cake.price * item.quantity} đ</strong>
+									<strong class="cart-line-total"><fmt:formatNumber value="${item.lineTotal}" type="currency" currencySymbol="₫" maxFractionDigits="0"/></strong>
 									<form action="${pageContext.request.contextPath}/cart" method="post">
 										<input type="hidden" name="action" value="remove">
-										<input type="hidden" name="cakeId" value="${item.cake.id}">
+										<input type="hidden" name="itemId" value="${item.id}">
 										<button class="cart-remove" type="submit">Xóa</button>
 									</form>
 								</div>

@@ -30,16 +30,16 @@
     </section>
 
     <section class="featured-products">
-        <h2>Bánh bán chạy nhất</h2>
-        <div class="product-grid">
-            <c:forEach var="cake" items="${cakeList}">
-                <div class="product-card">
-                    <img src="${pageContext.request.contextPath}/statics/images/${cake.localImageFile}" alt="${cake.name}">
-                    <h3>${cake.name}</h3>
-                    <p class="product-description">${cake.description}</p>
-                </div>
-            </c:forEach>
-        </div>
+    <h2>Bánh bán chạy nhất</h2>
+    <div class="product-grid">
+        <c:forEach var="cake" items="${top8Cakes}">
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/statics/images/${cake.imageUrl}" alt="${cake.name}">
+                <h3>${cake.name}</h3>
+                <p class="product-description">${cake.description}</p>
+            </div>
+        </c:forEach>
+    </div>
     </section>
 
     <section class="about">
