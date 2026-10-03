@@ -11,7 +11,7 @@
 	<main class="reviews-page">
 		<a class="continue-shopping" href="${pageContext.request.contextPath}/products">&larr; Quay lại thực đơn</a>
 		<section class="review-product">
-			<img src="${pageContext.request.contextPath}/statics/images/${cake.localImageFile}" alt="${cake.name}">
+			<img src="${cake.imageUrl}" alt="${cake.name}">
 			<div>
 				<p class="cart-eyebrow">BAKERSHOP</p>
 				<h1>Đánh giá ${cake.name}</h1>
@@ -31,6 +31,9 @@
 							<article class="review-card">
 								<div class="review-card-heading"><strong>${review.reviewerName}</strong><span class="review-stars">${review.rating} / 5</span></div>
 								<p>${review.comment}</p>
+								<c:if test="${not empty review.imageUrl}">
+									<img src="${pageContext.request.contextPath}/statics/images/${review.imageUrl}" alt="Ảnh đánh giá của ${review.reviewerName}" style="max-width: 220px; margin-top: 12px; border-radius: 8px;">
+								</c:if>
 							</article>
 						</c:forEach>
 					</c:otherwise>
@@ -44,19 +47,21 @@
 						<a class="cart-checkout" href="${pageContext.request.contextPath}/login">Đăng nhập</a>
 					</c:when>
 					<c:otherwise>
-						<form class="review-form" action="${pageContext.request.contextPath}/reviews" method="post">
-							<input type="hidden" name="cakeId" value="${cake.id}">
-							<label for="rating">Số sao</label>
-							<select id="rating" name="rating" required>
-								<option value="">Chọn số sao</option>
-								<option value="5">5 - Rất ngon</option>
-								<option value="4">4 - Ngon</option>
-								<option value="3">3 - Bình thường</option>
-								<option value="2">2 - Chưa phù hợp</option>
-								<option value="1">1 - Không hài lòng</option>
-							</select>
-							<label for="comment">Nhận xét</label>
-							<textarea id="comment" name="comment" rows="5" maxlength="1000" required></textarea>
+							<form class="review-form" action="${pageContext.request.contextPath}/reviews" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="cakeId" value="${cake.id}">
+								<label for="rating">Số sao</label>
+								<select id="rating" name="rating" required>
+									<option value="">Chọn số sao</option>
+									<option value="5">5 - Rất ngon</option>
+									<option value="4">4 - Ngon</option>
+									<option value="3">3 - Bình thường</option>
+									<option value="2">2 - Chưa phù hợp</option>
+									<option value="1">1 - Không hài lòng</option>
+								</select>
+								<label for="comment">Nhận xét</label>
+								<textarea id="comment" name="comment" rows="5" maxlength="1000" required></textarea>
+								<label for="reviewImage">Ảnh đính kèm (không bắt buộc)</label>
+								<input id="reviewImage" type="file" name="reviewImage" accept="image/*">
 							<button class="cart-checkout" type="submit">Gửi đánh giá</button>
 						</form>
 					</c:otherwise>

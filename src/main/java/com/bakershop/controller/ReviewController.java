@@ -5,15 +5,20 @@ import com.bakershop.dao.ReviewDAO;
 import com.bakershop.model.Cake;
 import com.bakershop.model.Review;
 import com.bakershop.model.User;
+import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 @WebServlet("/reviews")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 2 * 1024 * 1024, maxRequestSize = 5 * 1024 * 1024)
 public class ReviewController extends HttpServlet {
 	private final CakeDAO cakeDAO = new CakeDAO();
 	private final ReviewDAO reviewDAO = new ReviewDAO();
@@ -48,13 +53,52 @@ public class ReviewController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/reviews?cakeId=" + cakeId + "&error=invalid");
 			return;
 		}
+
+		String imageUrl = saveUploadedImage(request);
 		Review review = new Review();
 		review.setUserId(user.getId());
 		review.setCakeId((long) cakeId);
 		review.setRating((double) rating);
 		review.setComment(comment.trim());
+		review.setImageUrl(imageUrl);
 		reviewDAO.create(review);
 		response.sendRedirect(request.getContextPath() + "/reviews?cakeId=" + cakeId + "&success=true");
+	}
+
+	private String saveUploadedImage(HttpServletRequest request) throws IOException, ServletException {
+		Part filePart = request.getPart("reviewImage");
+		if (filePart == null || filePart.getSize() == 0) {
+			return null;
+		}
+
+		String submittedFileName = filePart.getSubmittedFileName();
+		if (submittedFileName == null || submittedFileName.trim().isEmpty()) {
+			return null;
+		}
+
+		String fileExtension = "";
+		int dotIndex = submittedFileName.lastIndexOf('.');
+		if (dotIndex > 0 && dotIndex < submittedFileName.length() - 1) {
+			fileExtension = submittedFileName.substring(dotIndex);
+		}
+		String safeExtension = fileExtension.toLowerCase();
+		if (!safeExtension.equals(".jpg") && !safeExtension.equals(".jpeg") && !safeExtension.equals(".png") && !safeExtension.equals(".webp")) {
+			return null;
+		}
+
+		String uploadDir = getServletContext().getRealPath("/statics/images/reviews");
+		if (uploadDir == null) {
+			uploadDir = new File("src/main/webapp/statics/images/reviews").getAbsolutePath();
+		}
+		File directory = new File(uploadDir);
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
+
+		String fileName = UUID.randomUUID() + safeExtension;
+		String targetPath = new File(directory, fileName).getAbsolutePath();
+		filePart.write(targetPath);
+		return "reviews/" + fileName;
 	}
 
 	private int parseCakeId(String value) {

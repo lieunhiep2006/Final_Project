@@ -34,7 +34,7 @@
     <div class="product-grid">
         <c:forEach var="cake" items="${top8Cakes}">
             <div class="product-card">
-                <img src="${pageContext.request.contextPath}/statics/images/${cake.imageUrl}" alt="${cake.name}">
+                <img src="${cake.imageUrl}" alt="${cake.name}">
                 <h3>${cake.name}</h3>
                 <p class="product-description">${cake.description}</p>
             </div>

@@ -6,6 +6,7 @@ public class Review {
 	private Long cakeId;
 	private Double rating;
 	private String comment;
+	private String imageUrl;
 	private String reviewerName;
 
     public Review() {}
@@ -32,6 +33,9 @@ public class Review {
 
 	public String getComment() { return comment; }
 	public void setComment(String comment) { this.comment = comment; }
+
+	public String getImageUrl() { return imageUrl; }
+	public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
 	public String getReviewerName() { return reviewerName; }
 	public void setReviewerName(String reviewerName) { this.reviewerName = reviewerName; }
