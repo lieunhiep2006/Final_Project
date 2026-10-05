@@ -12,7 +12,7 @@
     <main class="featured-products store-list-page">
         <h2>Hệ thống cửa hàng</h2>
         <div class="about-grid">
-            <c:forEach var="store" items="${storeList}">
+            <c:forEach var="store" items="${stores}">
                 <article class="about-item store-card">
                     <img src="${store.imageUrl}" alt="${store.name}">
                     <div class="store-card-content">
