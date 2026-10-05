@@ -56,7 +56,6 @@
 				</c:if>
 				<div class="summary-row"><span>Tạm tính</span><strong><fmt:formatNumber value="${cartTotal}" type="currency" currencySymbol="₫" maxFractionDigits="0"/></strong></div>
 				<div class="summary-row"><span>Giảm giá</span><strong class="summary-discount">-<fmt:formatNumber value="${discountAmount}" type="currency" currencySymbol="₫" maxFractionDigits="0"/></strong></div>
-				<div class="summary-row"><span>Phí giao hàng</span><strong><fmt:formatNumber value="0" type="currency" currencySymbol="₫" maxFractionDigits="0"/></strong></div>
 				<div class="summary-divider"></div>
 				<div class="summary-row summary-total"><span>Tổng cộng</span><strong><fmt:formatNumber value="${finalTotal}" type="currency" currencySymbol="₫" maxFractionDigits="0"/></strong></div>
 				<form class="order-form" action="${pageContext.request.contextPath}/checkout" method="post">
