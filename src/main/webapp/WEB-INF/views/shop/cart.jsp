@@ -69,7 +69,7 @@
 					<aside class="cart-summary">
 						<h2>Tóm tắt đơn hàng</h2>
 						<div class="summary-row"><span>Tạm tính</span><strong>${cartTotal} đ</strong></div>
-						<div class="summary-row"><span>Phí giao hàng</span><strong>0 đ</strong></div>
+						<div class="summary-row"><span>Phí giao hàng</span><strong>FREESHIP</strong></div>
 						<div class="summary-divider"></div>
 						<div class="summary-row summary-total"><span>Tổng cộng</span><strong>${cartTotal} đ</strong></div>
 						<form action="${pageContext.request.contextPath}/cart" method="post">
