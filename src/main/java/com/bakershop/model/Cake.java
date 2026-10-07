@@ -1,36 +1,43 @@
 package com.bakershop.model;
 
 public class Cake {
-    private Long id;
+
+    private int id;
     private String name;
     private String description;
-    private Double price;
+    private double price;
     private int stockQuantity;
-    private Long categoryId;
-    private String imageUrl;
+    private int categoryId;
 
 
-    public Cake() {}
+    public Cake() {
+    }
 
 
-    public Cake(Long id, String name, String description, Double price, int stockQuantity, Long categoryId, String imageUrl) {
+    public Cake(int id,
+                String name,
+                String description,
+                double price,
+                int stockQuantity,
+                int categoryId) {
+
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.categoryId = categoryId;
-        this.imageUrl = imageUrl;
     }
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
+
 
     public String getName() {
         return name;
@@ -40,6 +47,7 @@ public class Cake {
         this.name = name;
     }
 
+
     public String getDescription() {
         return description;
     }
@@ -48,13 +56,15 @@ public class Cake {
         this.description = description;
     }
 
-    public Double getPrice() {
+
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
+
 
     public int getStockQuantity() {
         return stockQuantity;
@@ -64,19 +74,12 @@ public class Cake {
         this.stockQuantity = stockQuantity;
     }
 
-    public Long getCategoryId() {
+
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 }

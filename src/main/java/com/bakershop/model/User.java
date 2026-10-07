@@ -2,18 +2,19 @@ package com.bakershop.model;
 
 public class User {
     private Long id;
-    private String full_name;
-    private String phone_number;
-    private String password_hash;
+    private String fullName;
+    private String phoneNumber;
+    private String passwordHash;
     private String address;
     private String role;
 
     public User() {}
-    public User(Long id, String full_name, String phone_number, String password_hash, String address, String role) {
+
+    public User(Long id, String fullName, String phoneNumber, String passwordHash, String address, String role) {
         this.id = id;
-        this.full_name = full_name;
-        this.phone_number = phone_number;
-        this.password_hash = password_hash;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.passwordHash = passwordHash;
         this.address = address;
         this.role = role;
     }
@@ -22,44 +23,44 @@ public class User {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getFullName() {
-        return full_name;
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPhoneNumber() {
-        return phone_number;
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPasswordHash() {
-        return password_hash;
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFullName(String full_name) {
-        this.full_name = full_name;
-    }
-
-    public void setPhoneNumber(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
-    public void setPasswordHash(String password_hash) {
-        this.password_hash = password_hash;
-    }
-
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void setRole(String role) {

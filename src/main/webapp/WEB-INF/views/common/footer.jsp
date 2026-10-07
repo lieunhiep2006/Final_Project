@@ -21,7 +21,7 @@
             <ul class="footer-links">
                 <li><a href="${pageContext.request.contextPath}/home">Trang chủ</a></li>
                 <li><a href="${pageContext.request.contextPath}/products">Thực đơn bánh</a></li>
-                <li><a href="${pageContext.request.contextPath}/store">Hệ thống cửa hàng</a></li>
+                <li><a href="${pageContext.request.contextPath}/stores">Hệ thống cửa hàng</a></li>
                 <li><a href="${pageContext.request.contextPath}/cart">Giỏ hàng của bạn</a></li>
             </ul>
         </div>
