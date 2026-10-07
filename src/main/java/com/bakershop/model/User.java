@@ -1,6 +1,7 @@
 package com.bakershop.model;
 
 public class User {
+
     private Long id;
     private String fullName;
     private String phoneNumber;
@@ -8,9 +9,16 @@ public class User {
     private String address;
     private String role;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(Long id, String fullName, String phoneNumber, String passwordHash, String address, String role) {
+    public User(Long id,
+                String fullName,
+                String phoneNumber,
+                String passwordHash,
+                String address,
+                String role) {
+
         this.id = id;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;

@@ -12,6 +12,7 @@
 <html lang="vi">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -21,6 +22,7 @@
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/statics/css/admin.css">
+
 </head>
 
 <body>
@@ -34,6 +36,7 @@
         </div>
 
         <div>
+
             <div class="brand-name">
                 BakerShop
             </div>
@@ -41,6 +44,7 @@
             <div class="brand-subtitle">
                 Admin Panel
             </div>
+
         </div>
 
     </div>
@@ -48,24 +52,31 @@
     <nav class="sidebar-menu">
 
         <a href="<c:url value='/admin/dashboard'/>">
+
             <span>🏠</span>
             Dashboard
+
         </a>
 
         <a class="active"
            href="<c:url value='/admin/manage-cakes'/>">
+
             <span>🍰</span>
             Manage Cakes
+
         </a>
 
         <a href="<c:url value='/admin/manage-orders'/>">
+
             <span>🛒</span>
             Manage Orders
+
         </a>
 
     </nav>
 
 </aside>
+
 
 <main class="main-content">
 
@@ -85,6 +96,7 @@
 
     </div>
 
+
     <section class="form-card">
 
         <div class="section-title">
@@ -99,6 +111,7 @@
 
         </div>
 
+
         <form method="post"
               action="<c:url value='/admin/manage-cakes'/>"
               class="cake-form">
@@ -107,6 +120,7 @@
                    name="action"
                    value="${empty editCake ? 'insert' : 'update'}">
 
+
             <c:if test="${not empty editCake}">
 
                 <input type="hidden"
@@ -114,6 +128,7 @@
                        value="${editCake.id}">
 
             </c:if>
+
 
             <div class="form-group">
 
@@ -129,6 +144,7 @@
 
             </div>
 
+
             <div class="form-group">
 
                 <label>
@@ -142,6 +158,7 @@
                        required>
 
             </div>
+
 
             <div class="form-group">
 
@@ -158,6 +175,7 @@
 
             </div>
 
+
             <div class="form-group">
 
                 <label>
@@ -172,6 +190,7 @@
                        required>
 
             </div>
+
 
             <div class="form-group">
 
@@ -210,6 +229,7 @@
 
             </div>
 
+
             <div class="form-submit">
 
                 <button type="submit">
@@ -221,6 +241,7 @@
         </form>
 
     </section>
+
 
     <section class="table-card">
 
@@ -237,6 +258,7 @@
                 </h2>
 
             </div>
+
 
             <div class="table-tools">
 
@@ -263,6 +285,7 @@
                     </button>
 
                 </form>
+
 
                 <select id="categoryFilter">
 
@@ -291,6 +314,7 @@
             </div>
 
         </div>
+
 
         <div class="table-wrapper">
 
@@ -332,6 +356,7 @@
 
                 </thead>
 
+
                 <tbody id="cakeTableBody">
 
                 <c:forEach var="cake"
@@ -343,6 +368,7 @@
                         <td>
                             ${status.index + 1}
                         </td>
+
 
                         <td>
 
@@ -360,9 +386,11 @@
 
                         </td>
 
+
                         <td class="description">
                             ${cake.description}
                         </td>
+
 
                         <td class="price">
 
@@ -374,6 +402,7 @@
                             đ
 
                         </td>
+
 
                         <td>
 
@@ -395,6 +424,7 @@
 
                                 </c:when>
 
+
                                 <c:otherwise>
 
                                     <span class="stock-badge sold-out">
@@ -407,6 +437,7 @@
 
                         </td>
 
+
                         <td>
 
                             <span class="category-badge">
@@ -414,6 +445,7 @@
                             </span>
 
                         </td>
+
 
                         <td>
 
@@ -438,6 +470,7 @@
 
                 </c:forEach>
 
+
                 <c:if test="${empty cakes}">
 
                     <tr>
@@ -459,6 +492,7 @@
 
         </div>
 
+
         <div class="table-footer">
 
             <span>
@@ -471,38 +505,43 @@
 
 </main>
 
+
 <script src="${pageContext.request.contextPath}/statics/js/main.js"></script>
+
 
 <script>
 
-    document.getElementById("categoryFilter").addEventListener("change", function () {
+    document.getElementById("categoryFilter")
+        .addEventListener("change", function () {
 
-        const selectedCategory = this.value;
+            const selectedCategory = this.value;
 
-        const rows = document.querySelectorAll(
-            "#cakeTableBody tr[data-category]"
-        );
+            const rows = document.querySelectorAll(
+                "#cakeTableBody tr[data-category]"
+            );
 
-        rows.forEach(function (row) {
+            rows.forEach(function (row) {
 
-            const category = row.getAttribute("data-category");
+                const category =
+                    row.getAttribute("data-category");
 
-            if (selectedCategory === "" ||
-                category === selectedCategory) {
+                if (selectedCategory === "" ||
+                    category === selectedCategory) {
 
-                row.style.display = "";
+                    row.style.display = "";
 
-            } else {
+                } else {
 
-                row.style.display = "none";
+                    row.style.display = "none";
 
-            }
+                }
+
+            });
 
         });
 
-    });
-
 </script>
+
 
 </body>
 

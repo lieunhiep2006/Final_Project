@@ -15,16 +15,12 @@ import java.util.List;
 @WebServlet("/admin/manage-cakes")
 public class AdminProductController extends HttpServlet {
 
-    private CakeDAO cakeDAO;    
-
+    private CakeDAO cakeDAO;
 
     @Override
     public void init() {
-
         cakeDAO = new CakeDAO();
-
     }
-
 
     @Override
     protected void doGet(
@@ -34,9 +30,6 @@ public class AdminProductController extends HttpServlet {
 
         String action = request.getParameter("action");
         String keyword = request.getParameter("keyword");
-
-
-        
 
         if ("delete".equals(action)) {
 
@@ -54,9 +47,6 @@ public class AdminProductController extends HttpServlet {
             return;
         }
 
-
-        
-
         if ("edit".equals(action)) {
 
             int id = Integer.parseInt(
@@ -71,9 +61,6 @@ public class AdminProductController extends HttpServlet {
             );
         }
 
-
-        
-
         List<Cake> cakes;
 
         if (keyword != null && !keyword.trim().isEmpty()) {
@@ -85,20 +72,15 @@ public class AdminProductController extends HttpServlet {
             cakes = cakeDAO.getAllCakes();
         }
 
-
-
         request.setAttribute(
-                "keyword"
-                , keyword);
-
+                "keyword",
+                keyword
+        );
 
         request.setAttribute(
                 "cakes",
                 cakes
         );
-
-
-        
 
         request.getRequestDispatcher(
                 "/WEB-INF/views/admin/manage-cakes.jsp"
@@ -107,7 +89,6 @@ public class AdminProductController extends HttpServlet {
                 response
         );
     }
-
 
     @Override
     protected void doPost(
@@ -119,11 +100,8 @@ public class AdminProductController extends HttpServlet {
 
         String action =
                 request.getParameter("action");
-        
+
         System.out.println("Action: " + action);
-
-
-       
 
         if ("insert".equals(action)) {
 
@@ -145,27 +123,20 @@ public class AdminProductController extends HttpServlet {
 
             cake.setStockQuantity(
                     Integer.parseInt(
-                            request.getParameter(
-                                    "stockQuantity"
-                            )
+                            request.getParameter("stockQuantity")
                     )
             );
 
             cake.setCategoryId(
                     Integer.parseInt(
-                            request.getParameter(
-                                    "categoryId"
-                            )
+                            request.getParameter("categoryId")
                     )
             );
 
             boolean result = cakeDAO.insertCake(cake);
 
             System.out.println("INSERT RESULT = " + result);
-
         }
-
-
 
         if ("update".equals(action)) {
 
@@ -193,23 +164,18 @@ public class AdminProductController extends HttpServlet {
 
             cake.setStockQuantity(
                     Integer.parseInt(
-                            request.getParameter(
-                                    "stockQuantity"
-                            )
+                            request.getParameter("stockQuantity")
                     )
             );
 
             cake.setCategoryId(
                     Integer.parseInt(
-                            request.getParameter(
-                                    "categoryId"
-                            )
+                            request.getParameter("categoryId")
                     )
             );
 
             cakeDAO.updateCake(cake);
         }
-
 
         response.sendRedirect(
                 request.getContextPath()

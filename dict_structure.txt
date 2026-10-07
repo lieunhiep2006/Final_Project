@@ -57,13 +57,15 @@
             │       ├── shop
             │       │   ├── home.jsp
             │       │   ├── product-list.jsp
-            │       │   ├── product-detail.jsp
+            │       │   ├── update-auth.jsp
             │       │   ├── cart.jsp
             │       │   └── checkout.jsp
             │       └── admin
             │           ├── dashboard.jsp
             │           ├── manage-cakes.jsp
             │           └── manage-orders.jsp
+                        └── manage-reviews.jsp
+
             ├── static                        # Tài nguyên tĩnh
             │   ├── css
             │   │   ├── main.css

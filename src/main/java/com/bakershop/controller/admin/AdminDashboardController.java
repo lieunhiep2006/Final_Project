@@ -55,43 +55,33 @@ public class AdminDashboardController extends HttpServlet {
         int completedOrders = orderDAO.countCompletedOrders();
 
         double completedRevenue =
-            orderDAO.getRevenueByStatus("Completed");
+                orderDAO.getRevenueByStatus("Completed");
 
         double deliveringRevenue =
-            orderDAO.getRevenueByStatus("Delivering");
+                orderDAO.getRevenueByStatus("Delivering");
 
         double pendingRevenue =
-            orderDAO.getRevenueByStatus("Pending");
+                orderDAO.getRevenueByStatus("Pending");
 
         double cancelledRevenue =
-            orderDAO.getRevenueByStatus("Cancelled");
+                orderDAO.getRevenueByStatus("Cancelled");
 
         request.setAttribute("cakes", cakes);
-        
         request.setAttribute("orders", orders);
 
         request.setAttribute("totalCakes", totalCakes);
-        
         request.setAttribute("totalStock", totalStock);
-        
         request.setAttribute("pendingOrders", pendingOrders);
-        
         request.setAttribute("lowStock", lowStock);
-        
         request.setAttribute("outOfStock", outOfStock);
 
         request.setAttribute("totalRevenue", totalRevenue);
-
         request.setAttribute("paidRevenue", paidRevenue);
 
         request.setAttribute("completedOrders", completedOrders);
-
         request.setAttribute("completedRevenue", completedRevenue);
-        
         request.setAttribute("deliveringRevenue", deliveringRevenue);
-
         request.setAttribute("pendingRevenue", pendingRevenue);
-
         request.setAttribute("cancelledRevenue", cancelledRevenue);
 
         request.getRequestDispatcher(

@@ -132,9 +132,9 @@ public class Order {
 
     public String getCustomerName() {
         return customerName;
-}
+    }
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
-}
+    }
 }

@@ -9,10 +9,8 @@ public class Cake {
     private int stockQuantity;
     private int categoryId;
 
-
     public Cake() {
     }
-
 
     public Cake(int id,
                 String name,
@@ -29,7 +27,6 @@ public class Cake {
         this.categoryId = categoryId;
     }
 
-
     public int getId() {
         return id;
     }
@@ -37,7 +34,6 @@ public class Cake {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -47,7 +43,6 @@ public class Cake {
         this.name = name;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -55,7 +50,6 @@ public class Cake {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public double getPrice() {
         return price;
@@ -65,7 +59,6 @@ public class Cake {
         this.price = price;
     }
 
-
     public int getStockQuantity() {
         return stockQuantity;
     }
@@ -73,7 +66,6 @@ public class Cake {
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
-
 
     public int getCategoryId() {
         return categoryId;

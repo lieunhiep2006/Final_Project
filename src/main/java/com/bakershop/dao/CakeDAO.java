@@ -31,29 +31,12 @@ public class CakeDAO {
 
                 Cake cake = new Cake();
 
-                cake.setId(
-                    rs.getInt("id")
-                );
-
-                cake.setName(
-                    rs.getString("name")
-                );
-
-                cake.setDescription(
-                    rs.getString("description")
-                );
-
-                cake.setPrice(
-                    rs.getDouble("price")
-                );
-
-                cake.setStockQuantity(
-                    rs.getInt("stock_quantity")
-                );
-
-                cake.setCategoryId(
-                    rs.getInt("category_id")
-                );
+                cake.setId(rs.getInt("id"));
+                cake.setName(rs.getString("name"));
+                cake.setDescription(rs.getString("description"));
+                cake.setPrice(rs.getDouble("price"));
+                cake.setStockQuantity(rs.getInt("stock_quantity"));
+                cake.setCategoryId(rs.getInt("category_id"));
 
                 list.add(cake);
             }
@@ -73,7 +56,6 @@ public class CakeDAO {
 
         return list;
     }
-
 
     public Cake getCakeById(int id) {
 
@@ -95,29 +77,12 @@ public class CakeDAO {
 
                     Cake cake = new Cake();
 
-                    cake.setId(
-                        rs.getInt("id")
-                    );
-
-                    cake.setName(
-                        rs.getString("name")
-                    );
-
-                    cake.setDescription(
-                        rs.getString("description")
-                    );
-
-                    cake.setPrice(
-                        rs.getDouble("price")
-                    );
-
-                    cake.setStockQuantity(
-                        rs.getInt("stock_quantity")
-                    );
-
-                    cake.setCategoryId(
-                        rs.getInt("category_id")
-                    );
+                    cake.setId(rs.getInt("id"));
+                    cake.setName(rs.getString("name"));
+                    cake.setDescription(rs.getString("description"));
+                    cake.setPrice(rs.getDouble("price"));
+                    cake.setStockQuantity(rs.getInt("stock_quantity"));
+                    cake.setCategoryId(rs.getInt("category_id"));
 
                     return cake;
                 }
@@ -131,47 +96,43 @@ public class CakeDAO {
         return null;
     }
 
-
     public boolean insertCake(Cake cake) {
 
-    String sql =
-            "INSERT INTO cake " +
-            "(name, description, price, stock_quantity, category_id) " +
-            "VALUES (?, ?, ?, ?, ?)";
+        String sql =
+                "INSERT INTO cake "
+                + "(name, description, price, stock_quantity, category_id) "
+                + "VALUES (?, ?, ?, ?, ?)";
 
-    try (
+        try (
             Connection conn = DBContext.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)
-    ) {
+        ) {
 
-        ps.setString(1, cake.getName());
-        ps.setString(2, cake.getDescription());
-        ps.setDouble(3, cake.getPrice());
-        ps.setInt(4, cake.getStockQuantity());
-        ps.setInt(5, cake.getCategoryId());
+            ps.setString(1, cake.getName());
+            ps.setString(2, cake.getDescription());
+            ps.setDouble(3, cake.getPrice());
+            ps.setInt(4, cake.getStockQuantity());
+            ps.setInt(5, cake.getCategoryId());
 
-        int result = ps.executeUpdate();
+            int result = ps.executeUpdate();
 
-        System.out.println(
+            System.out.println(
                 "So dong INSERT = " + result
-        );
+            );
 
-        return result > 0;
+            return result > 0;
 
-    } catch (Exception e) {
+        } catch (Exception e) {
 
-        System.out.println(
+            System.out.println(
                 "=== LOI INSERT CAKE ==="
-        );
+            );
 
-        e.printStackTrace();
+            e.printStackTrace();
+        }
 
+        return false;
     }
-
-    return false;
-}
-
-
 
     public boolean updateCake(Cake cake) {
 
@@ -188,35 +149,12 @@ public class CakeDAO {
             PreparedStatement ps = conn.prepareStatement(sql)
         ) {
 
-            ps.setString(
-                1,
-                cake.getName()
-            );
-
-            ps.setString(
-                2,
-                cake.getDescription()
-            );
-
-            ps.setDouble(
-                3,
-                cake.getPrice()
-            );
-
-            ps.setInt(
-                4,
-                cake.getStockQuantity()
-            );
-
-            ps.setInt(
-                5,
-                cake.getCategoryId()
-            );
-
-            ps.setInt(
-                6,
-                cake.getId()
-            );
+            ps.setString(1, cake.getName());
+            ps.setString(2, cake.getDescription());
+            ps.setDouble(3, cake.getPrice());
+            ps.setInt(4, cake.getStockQuantity());
+            ps.setInt(5, cake.getCategoryId());
+            ps.setInt(6, cake.getId());
 
             return ps.executeUpdate() > 0;
 
@@ -227,7 +165,6 @@ public class CakeDAO {
 
         return false;
     }
-
 
     public boolean deleteCake(int id) {
 
@@ -249,7 +186,9 @@ public class CakeDAO {
 
         return false;
     }
+
     public List<Cake> searchCakes(String keyword) {
+
         List<Cake> list = new ArrayList<>();
 
         String sql = "SELECT id, name, description, price, "
@@ -264,6 +203,7 @@ public class CakeDAO {
         ) {
 
             String searchPattern = "%" + keyword + "%";
+
             ps.setString(1, searchPattern);
             ps.setString(2, searchPattern);
 
@@ -273,29 +213,12 @@ public class CakeDAO {
 
                     Cake cake = new Cake();
 
-                    cake.setId(
-                        rs.getInt("id")
-                    );
-
-                    cake.setName(
-                        rs.getString("name")
-                    );
-
-                    cake.setDescription(
-                        rs.getString("description")
-                    );
-
-                    cake.setPrice(
-                        rs.getDouble("price")
-                    );
-
-                    cake.setStockQuantity(
-                        rs.getInt("stock_quantity")
-                    );
-
-                    cake.setCategoryId(
-                        rs.getInt("category_id")
-                    );
+                    cake.setId(rs.getInt("id"));
+                    cake.setName(rs.getString("name"));
+                    cake.setDescription(rs.getString("description"));
+                    cake.setPrice(rs.getDouble("price"));
+                    cake.setStockQuantity(rs.getInt("stock_quantity"));
+                    cake.setCategoryId(rs.getInt("category_id"));
 
                     list.add(cake);
                 }
@@ -310,41 +233,48 @@ public class CakeDAO {
     }
 
     public int countLowStockCakes() {
-    String sql = "SELECT COUNT(*) FROM cake "
-               + "WHERE stock_quantity > 0 AND stock_quantity <= 5";
 
-    try {
-        Connection conn = DBContext.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+        String sql = "SELECT COUNT(*) FROM cake "
+                   + "WHERE stock_quantity > 0 AND stock_quantity <= 5";
 
-        if (rs.next()) {
-            return rs.getInt(1);
+        try (
+            Connection conn = DBContext.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()
+        ) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
 
-    return 0;
-}
+        return 0;
+    }
 
     public int countOutOfStockCakes() {
-    String sql = "SELECT COUNT(*) FROM cake "
-               + "WHERE stock_quantity = 0";
 
-    try {
-        Connection conn = DBContext.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+        String sql = "SELECT COUNT(*) FROM cake "
+                   + "WHERE stock_quantity = 0";
 
-        if (rs.next()) {
-            return rs.getInt(1);
+        try (
+            Connection conn = DBContext.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()
+        ) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+
+        return 0;
     }
-
-    return 0;
-}
-
 }
