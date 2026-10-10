@@ -1,0 +1,10 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "git.ignoreLimitWarning": true,
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\ADMIN\\.rsp\\redhat-community-server-connector\\runtimes\\installations\\tomcat-9.0.30\\apache-tomcat-9.0.30\\lib\\jsp-api.jar",
+        "c:\\Users\\ADMIN\\.rsp\\redhat-community-server-connector\\runtimes\\installations\\tomcat-9.0.30\\apache-tomcat-9.0.30\\lib\\servlet-api.jar",
+        "target/final_project/WEB-INF/lib/jbcrypt-0.4.jar"
+    ]
+}
