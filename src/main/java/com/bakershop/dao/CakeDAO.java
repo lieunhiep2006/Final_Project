@@ -134,6 +134,7 @@ public class CakeDAO {
                     c.setStockQuantity(rs.getInt("stock_quantity"));
                     c.setCategoryId(rs.getLong("category_id"));
                     c.setImageUrl(rs.getString("image_url"));
+                    c.setComponents(rs.getString("components"));
                     return c;
                 }
             }

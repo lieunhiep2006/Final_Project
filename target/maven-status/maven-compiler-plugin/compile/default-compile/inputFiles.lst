@@ -1,39 +1,42 @@
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/VoucherDAO.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/StoreDAO.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/CartController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/Voucher.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/OrderHistoryController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/ProductController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/Review.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/CartItem.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/UserDAO.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/utils/CurrencyUtils.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/Order.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/filter/EncodingFilter.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/ReviewController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/utils/PasswordUtils.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/StoreController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/Image.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/AboutController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/Cake.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/User.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/admin/AdminDashboardController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/DBContext.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/CategoryDAO.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/Cart.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/Store.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/OrderItem.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/ProfileController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/filter/AppLayoutFilter.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/admin/AdminProfileServlet.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/AuthController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/model/Category.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/CartDAO.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/HomeController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/CheckoutController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/admin/AdminOrderController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/OrderDAO.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/CakeDAO.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/controller/admin/AdminProductController.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/filter/AuthenticationFilter.java
-/Users/lieuhongnhiep/Downloads/FinalProjectDaGop/src/main/java/com/bakershop/dao/ReviewDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\StoreDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\ProductController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\ProductDetailController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\FavoriteDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\VoucherDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\CartDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\ReviewController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\Image.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\CartController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\admin\AdminProductController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\CheckoutController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\OrderDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\Review.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\AuthController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\Cake.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\User.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\Store.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\Cart.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\HomeController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\filter\AppLayoutFilter.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\admin\AdminProfileServlet.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\ProfileController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\AboutController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\filter\AuthenticationFilter.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\utils\PasswordUtils.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\CakeDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\admin\AdminOrderController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\FavoriteController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\Order.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\admin\AdminDashboardController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\UserDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\Voucher.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\CategoryDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\CartItem.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\OrderHistoryController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\ReviewDAO.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\Category.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\dao\DBContext.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\controller\StoreController.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\filter\EncodingFilter.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\model\OrderItem.java
+D:\Nguyen Tuan Anh\University hell\3rd year\Semester 1\Term 1\Web programming\Final_Project\src\main\java\com\bakershop\utils\CurrencyUtils.java

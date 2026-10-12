@@ -27,6 +27,9 @@
         <a href="#">Thực đơn bánh <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i></a>
         <ul class="dropdown-menu">
           <li><a href="${pageContext.request.contextPath}/products">Tất cả bánh</a></li>
+          <c:if test="${not empty sessionScope.user}">
+            <li><a href="${pageContext.request.contextPath}/favorites">Bánh yêu thích</a></li>
+          </c:if>
           
           <c:forEach var="cat" items="${categoryList}">
             <li>

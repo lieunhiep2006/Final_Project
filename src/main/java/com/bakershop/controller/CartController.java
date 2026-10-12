@@ -10,6 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 @WebServlet("/cart")
 public class CartController extends HttpServlet {
@@ -71,9 +75,19 @@ public class CartController extends HttpServlet {
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 String size = request.getParameter("size");
                 String note = request.getParameter("note");
+                LocalDate deliveryDate = LocalDate.parse(request.getParameter("deliveryDate"));
+                LocalTime deliveryTime = LocalTime.parse(request.getParameter("deliveryTime"));
+                LocalDateTime deliveryDateTime = LocalDateTime.of(deliveryDate, deliveryTime);
+
+                if (!deliveryDateTime.isAfter(LocalDateTime.now())) {
+                    session.setAttribute("cartError", "Vui lòng chọn thời gian giao hàng trong tương lai.");
+                    response.sendRedirect(request.getContextPath() + "/cart");
+                    return;
+                }
                 
                 if (size == null || size.trim().isEmpty()) size = "M";
                 cartDAO.addOrUpdateItem(cart.getId(), cakeId, size, quantity, note);
+                session.setAttribute("deliveryDateTime", deliveryDateTime);
 
             } else if ("update".equals(action)) {
                 long itemId = Long.parseLong(request.getParameter("itemId"));
@@ -89,8 +103,10 @@ public class CartController extends HttpServlet {
             } else if ("clear".equals(action)) {
                 cartDAO.clearCart(cart.getId());
             }
+        } catch (DateTimeParseException | NumberFormatException | NullPointerException e) {
+            session.setAttribute("cartError", "Vui lòng chọn ngày và giờ giao hàng hợp lệ.");
         } catch (Exception e) {
-            session.setAttribute("cartError", "Lỗi cartController");
+            session.setAttribute("cartError", "Không thể cập nhật giỏ hàng. Vui lòng thử lại.");
             e.printStackTrace();
         }
 

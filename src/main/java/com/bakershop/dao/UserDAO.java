@@ -120,4 +120,17 @@ public class UserDAO {
             return false;
         }
     }
+
+    public boolean updatePasswordHashById(Long userId, String passwordHash) {
+        String sql = "UPDATE [User] SET password_hash = ? WHERE id = ?";
+        try (Connection conn = DBContext.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, passwordHash);
+            ps.setLong(2, userId);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

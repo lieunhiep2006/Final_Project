@@ -9,6 +9,8 @@ import com.bakershop.model.CartItem;
 import com.bakershop.model.User;
 import com.bakershop.model.Voucher;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -57,6 +59,11 @@ public class CheckoutController extends HttpServlet {
 		request.setAttribute("finalTotal", subtotal - discount);
 		request.setAttribute("storeList", storeDAO.getAllStores());
 		request.setAttribute("user", user);
+		LocalDateTime deliveryDateTime = (LocalDateTime) request.getSession().getAttribute("deliveryDateTime");
+		if (deliveryDateTime != null) {
+			request.setAttribute("deliveryDate", deliveryDateTime.toLocalDate().toString());
+			request.setAttribute("deliveryTime", deliveryDateTime.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")));
+		}
 		request.getRequestDispatcher("/WEB-INF/views/shop/checkout.jsp").forward(request, response);
 	}
 
@@ -103,21 +110,32 @@ public class CheckoutController extends HttpServlet {
 		String address = trim(request.getParameter("deliveryAddress"));
 		String phone = trim(request.getParameter("deliveryPhone"));
 		String paymentMethod = trim(request.getParameter("paymentMethod"));
+		LocalDateTime deliveryDateTime;
+		try {
+			deliveryDateTime = LocalDateTime.parse(
+					trim(request.getParameter("deliveryDate")) + "T" + trim(request.getParameter("deliveryTime")));
+		} catch (java.time.DateTimeException exception) {
+			session.setAttribute("checkoutMessage", "Vui lòng chọn ngày và giờ giao hàng hợp lệ.");
+			response.sendRedirect(request.getContextPath() + "/checkout");
+			return;
+		}
 		if (storeId <= 0 || address.isEmpty() || phone.isEmpty()
-				|| !("momo".equals(paymentMethod) || "onlineBanking".equals(paymentMethod))) {
-			session.setAttribute("checkoutMessage", "Vui lòng chọn phương thức thanh toán và nhập đầy đủ thông tin giao hàng.");
+				|| !deliveryDateTime.isAfter(LocalDateTime.now())
+				|| !("cash".equals(paymentMethod) || "momo".equals(paymentMethod) || "onlineBanking".equals(paymentMethod))) {
+			session.setAttribute("checkoutMessage", "Vui lòng chọn thời gian giao hàng trong tương lai, phương thức thanh toán và nhập đầy đủ thông tin giao hàng.");
 			response.sendRedirect(request.getContextPath() + "/checkout");
 			return;
 		}
 		Voucher voucher = (Voucher) session.getAttribute(VOUCHER_ATTRIBUTE);
 		double discount = getDiscount(voucher, subtotal);
-		long orderId = orderDAO.createOrder(user.getId(), storeId, address, phone, cartItems,
+		long orderId = orderDAO.createOrder(user.getId(), storeId, address, phone, deliveryDateTime, cartItems,
 				voucher, subtotal, discount, subtotal - discount);
 		Cart cart = cartDAO.getOrCreateCartByUserId(user.getId());
 		if (cart != null) {
 			cartDAO.clearCart(cart.getId());
 		}
 		session.removeAttribute(VOUCHER_ATTRIBUTE);
+		session.removeAttribute("deliveryDateTime");
 		session.setAttribute("lastOrderId", orderId);
 		response.sendRedirect(request.getContextPath() + "/checkout-success");
 	}

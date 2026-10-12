@@ -10,8 +10,10 @@ import java.util.List;
 
 import com.bakershop.dao.CakeDAO;
 import com.bakershop.dao.CategoryDAO;
+import com.bakershop.dao.FavoriteDAO;
 import com.bakershop.model.Cake;
 import com.bakershop.model.Category;
+import com.bakershop.model.User;
 
 @WebServlet("/products")
 public class ProductController extends HttpServlet {
@@ -41,6 +43,22 @@ public class ProductController extends HttpServlet {
 
         request.setAttribute("cakes", cakes);
         request.setAttribute("category", cat);
+        String queryString = request.getQueryString();
+        request.setAttribute("returnTo", request.getRequestURI()
+                + (queryString == null || queryString.isEmpty() ? "" : "?" + queryString));
+
+        javax.servlet.http.HttpSession session = request.getSession(false);
+        User user = session == null ? null : (User) session.getAttribute("user");
+        if (user != null) {
+            try {
+                java.util.Set<Long> favoriteCakeIds = new FavoriteDAO().getCakeIdsForUser(user.getId());
+                for (Cake cake : cakes) {
+                    cake.setFavorited(favoriteCakeIds.contains(cake.getId()));
+                }
+            } catch (java.sql.SQLException exception) {
+                throw new ServletException("Unable to load favorite products", exception);
+            }
+        }
 
         request.getRequestDispatcher("/WEB-INF/views/shop/product-list.jsp").forward(request, response);
     }

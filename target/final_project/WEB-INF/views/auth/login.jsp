@@ -39,12 +39,19 @@
 					<label for="login-phone">Số điện thoại</label>
 					<div class="auth-input"><i class="fa-solid fa-phone"></i><input id="login-phone" type="tel" name="phoneNumber" autocomplete="tel" required></div>
 					<label for="login-password">Mật khẩu</label>
-					<div class="auth-input"><i class="fa-solid fa-lock"></i><input id="login-password" type="password" name="password" autocomplete="current-password" required></div>
+					<div class="auth-input">
+						<i class="fa-solid fa-lock" aria-hidden="true"></i>
+						<input id="login-password" type="password" name="password" autocomplete="current-password" required>
+						<button class="password-visibility-toggle" type="button" aria-label="Hiển thị mật khẩu" aria-pressed="false" aria-controls="login-password">
+							<i class="fa-solid fa-eye" aria-hidden="true"></i>
+						</button>
+					</div>
 					<button class="auth-submit" type="submit">Đăng nhập <i class="fa-solid fa-arrow-right"></i></button>
 				</form>
 				<p class="auth-switch">Chưa có tài khoản? <a href="${pageContext.request.contextPath}/register">Đăng ký ngay</a></p>
 			</div>
 		</section>
 	</main>
+	<script src="${pageContext.request.contextPath}/statics/js/main.js"></script>
 </body>
 </html>

@@ -8,6 +8,8 @@ public class Cake {
     private int stockQuantity;
     private Long categoryId;
     private String imageUrl;
+    private boolean favorited;
+    private String components;
 
 
     public Cake() {}
@@ -78,5 +80,21 @@ public class Cake {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
+
+    public String getComponents() {
+        return components;
+    }
+
+    public void setComponents(String components) {
+        this.components = components;
     }
 }

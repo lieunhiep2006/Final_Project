@@ -42,6 +42,9 @@
 							</div>
 							<div class="order-history-details">
 								<span>Giao đến: ${order.deliveryAddress}</span>
+								<c:if test="${not empty order.deliveryTime}">
+									<span>Thời gian giao: <fmt:formatDate value="${order.deliveryTime}" pattern="dd/MM/yyyy HH:mm"/></span>
+								</c:if>
 								<span>Thanh toán: ${order.paymentStatus}</span>
 								<c:if test="${not empty order.voucherCode}"><span>Voucher: ${order.voucherCode}</span></c:if>
 							</div>

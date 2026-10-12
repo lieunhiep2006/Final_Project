@@ -1,6 +1,7 @@
 package com.bakershop.dao;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,9 @@ public class OrderDAO {
         return getListOrderById(userId);
     }
 
-    public long createOrder(Long userId, int storeId, String address, String phone,
+    public long createOrder(Long userId, int storeId, String address, String phone, LocalDateTime deliveryTime,
             List<CartItem> cartItems, Voucher voucher, double subtotal, double discount, double total) {
-        String orderSql = "INSERT INTO [order] (user_id, voucher_id, store_id, delivery_address, delivery_phone, subtotal, discount_amount, shipping_fee, total_amount, status, payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING', 'UNPAID')";
+        String orderSql = "INSERT INTO [order] (user_id, voucher_id, store_id, delivery_address, delivery_phone, delivery_time, subtotal, discount_amount, shipping_fee, total_amount, status, payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING', 'UNPAID')";
         String itemSql = "INSERT INTO order_items (order_id, cake_id, size, quantity, price, note) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBContext.getConnection()) {
             conn.setAutoCommit(false);
@@ -30,10 +31,11 @@ public class OrderDAO {
                 orderStatement.setInt(3, storeId);
                 orderStatement.setString(4, address);
                 orderStatement.setString(5, phone);
-                orderStatement.setDouble(6, subtotal);
-                orderStatement.setDouble(7, discount);
-                orderStatement.setDouble(8, 0);
-                orderStatement.setDouble(9, total);
+                orderStatement.setTimestamp(6, Timestamp.valueOf(deliveryTime));
+                orderStatement.setDouble(7, subtotal);
+                orderStatement.setDouble(8, discount);
+                orderStatement.setDouble(9, 0);
+                orderStatement.setDouble(10, total);
                 orderStatement.executeUpdate();
                 try (ResultSet keys = orderStatement.getGeneratedKeys()) {
                     if (!keys.next()) {
@@ -65,7 +67,7 @@ public class OrderDAO {
     }
 
     public List<Order> getListOrderById(Long userId) {
-        String orderSql = "select top 100 o.id, o.status, o.payment_status, o.delivery_address, "
+        String orderSql = "select top 100 o.id, o.status, o.payment_status, o.delivery_address, o.delivery_time, "
             + "o.total_amount, s.name as store_name, v.code as voucher_code "
             + "from [order] o "
             + "left join store s on o.store_id = s.id "
@@ -86,6 +88,7 @@ public class OrderDAO {
                     o.setStatus(rs.getString("status"));
                     o.setPaymentStatus(rs.getString("payment_status"));
                     o.setDeliveryAddress(rs.getString("delivery_address"));
+                    o.setDeliveryTime(rs.getTimestamp("delivery_time"));
                     o.setTotalAmount(rs.getDouble("total_amount"));
                     o.setStoreName(rs.getString("store_name"));
                     o.setVoucherCode(rs.getString("voucher_code"));
@@ -122,7 +125,7 @@ public class OrderDAO {
     }
 
     public List<Order> getAllOrders() {
-        String orderSql = "select o.id, o.user_id, o.status, o.payment_status, o.delivery_address, "
+        String orderSql = "select o.id, o.user_id, o.status, o.payment_status, o.delivery_address, o.delivery_time, "
             + "o.total_amount, s.name as store_name, v.code as voucher_code, "
             + "u.full_name as customer_name "
             + "from [order] o "
@@ -143,6 +146,7 @@ public class OrderDAO {
                 o.setStatus(rs.getString("status"));
                 o.setPaymentStatus(rs.getString("payment_status"));
                 o.setDeliveryAddress(rs.getString("delivery_address"));
+                o.setDeliveryTime(rs.getTimestamp("delivery_time"));
                 o.setTotalAmount(rs.getDouble("total_amount"));
                 o.setStoreName(rs.getString("store_name"));
                 o.setVoucherCode(rs.getString("voucher_code"));

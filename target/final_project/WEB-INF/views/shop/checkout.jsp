@@ -71,6 +71,10 @@
 					<input id="deliveryAddress" name="deliveryAddress" type="text" value="<c:out value='${user.address}'/>" maxlength="255" required>
 					<label for="deliveryPhone">Số điện thoại</label>
 					<input id="deliveryPhone" name="deliveryPhone" type="tel" value="<c:out value='${user.phoneNumber}'/>" maxlength="20" required>
+					<label for="deliveryDate">Ngày giao hàng</label>
+					<input id="deliveryDate" name="deliveryDate" type="date" value="${deliveryDate}" min="<%= java.time.LocalDate.now() %>" required>
+					<label for="deliveryTime">Giờ giao hàng</label>
+					<input id="deliveryTime" name="deliveryTime" type="time" value="${deliveryTime}" required>
 					<fieldset class="payment-methods">
 						<legend>Phương thức thanh toán</legend>
 						<label class="payment-option">
