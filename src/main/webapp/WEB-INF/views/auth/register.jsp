@@ -57,7 +57,7 @@
                     </div>
                     <button class="auth-submit" type="submit">Tạo tài khoản <i class="fa-solid fa-arrow-right"></i></button>
                 </form>
-                <p class="auth-switch">Đã có tài khoản? <a href="${pageContext.request.contextPath}/login">Đăng nhập</a></p> đoạn script xử lý ẩn/hiện mật khẩu nếu trang của bạn chưa có sẵn:
+                <p class="auth-switch">Đã có tài khoản? <a href="${pageContext.request.contextPath}/login">Đăng nhập</a></p>
             </div>
         </section>
     </main>
