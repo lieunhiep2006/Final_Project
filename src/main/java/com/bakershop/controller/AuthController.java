@@ -1,27 +1,25 @@
 package com.bakershop.controller;
-import java.io.IOException;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
-
-
 
 import com.bakershop.dao.UserDAO;
 import com.bakershop.model.User;
 
-
 @WebServlet({"/login", "/register", "/logout"})
 public class AuthController extends HttpServlet {
     private UserDAO userDAO;
+
     @Override 
     public void init() throws ServletException {
         this.userDAO = new UserDAO();
     }
+
     @Override 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String url = request.getServletPath();
@@ -36,14 +34,10 @@ public class AuthController extends HttpServlet {
             case "/logout":
                 handleLogout(request, response);
                 break;
-            case "/profile":
-                request.getRequestDispatcher("/WEB-INF/views/auth/profile.jsp").forward(request, response);
-                break;
             default:
                 response.sendRedirect(request.getContextPath() + "/home");
                 break;
         }
-        
     }
 
     @Override
@@ -57,36 +51,16 @@ public class AuthController extends HttpServlet {
             case "/register":
                 handleRegister(request, response);
                 break;
-            case "/profile":
-                handleUpdateProfile(request, response);
-                break;
             default:
                 response.sendRedirect(request.getContextPath() + "/home");
                 break;
         }
     }
 
-    private void handleUpdateProfile(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String fullName = request.getParameter("fullName");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String address = request.getParameter("address");
-
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if(user != null) {
-            UserDAO userDAO = new UserDAO();
-            userDAO.updateUser(user.getId(), fullName, phoneNumber, address);
-            user.setFullName(fullName);
-            user.setPhoneNumber(phoneNumber);
-            user.setAddress(address);
-            session.setAttribute("user", user);
-            
-        }
-        response.sendRedirect(request.getContextPath() + "/home");
-    }
     private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String phoneNumber = request.getParameter("phoneNumber");
         String password = request.getParameter("password");
+        
         if(phoneNumber == null || password == null || phoneNumber.trim().isEmpty() || password.trim().isEmpty()) {
             request.setAttribute("error", "Vui lòng điền đầy đủ thông tin!");
             request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
@@ -99,15 +73,20 @@ public class AuthController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             
+            String role = user.getRole(); 
             
-            response.sendRedirect(request.getContextPath() + "/home");
-            
+            if ("Admin".equalsIgnoreCase(role)) {
+                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/home");
+            }
 
         } else {
             request.setAttribute("error", "Sai số điện thoại hoặc mật khẩu!");
             request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
         }
     }
+
     private void handleRegister(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String fullName = request.getParameter("fullName");
         String phoneNumber = request.getParameter("phoneNumber");
@@ -126,10 +105,11 @@ public class AuthController extends HttpServlet {
             return;
         }
         if(!password.trim().equals(confirmPassword.trim())) {
-            request.setAttribute("error", "Chưa xác nhận được mật khẩu");
+            request.setAttribute("error", "Mật khẩu xác nhận không khớp");
             request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
             return;
         }
+        
         User newUser = new User(
             null,
             fullName.trim(),
@@ -144,16 +124,12 @@ public class AuthController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("authSuccess", "Đăng ký thành công! Vui lòng đăng nhập.");
             response.sendRedirect(request.getContextPath() + "/login");
-        }
-        else {
+        } else {
             request.setAttribute("error", "Đăng ký thất bại! Đã có lỗi xảy ra phía máy chủ.");
             request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
         }
-        
-
-
-        
     }
+
     private void handleLogout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         if(session != null) {
@@ -161,8 +137,4 @@ public class AuthController extends HttpServlet {
         }
         response.sendRedirect(request.getContextPath() + "/login");
     }
-
 }
-    
-
-

@@ -18,20 +18,28 @@
                     <div class="brand-subtitle">Admin Panel</div>
                 </div>
             </div>
-            <nav class="sidebar-menu">
-                <a class="active" href="<c:url value='/admin/dashboard'/>">
-                    <span>🏠</span>
-                    Dashboard
-                </a>
-                <a href="<c:url value='/admin/manage-cakes'/>">
-                    <span>🍰</span>
-                    Manage Cakes
-                </a>
-                <a href="<c:url value='/admin/manage-orders'/>">
-                    <span>🛒</span>
-                    Manage Orders
-                </a>
-            </nav>
+        <nav class="sidebar-menu">
+            <a class="active" href="<c:url value='/admin/dashboard'/>">
+                <span>🏠</span>
+                Dashboard
+            </a>
+            <a href="<c:url value='/admin/manage-cakes'/>">
+                <span>🍰</span>
+                Manage Cakes
+            </a>
+            <a href="<c:url value='/admin/manage-orders'/>">
+                <span>🛒</span>
+                Manage Orders
+            </a>
+            <a href="<c:url value='/admin/manage-vouchers'/>">
+                <span>🎟️</span>
+                Manage Vouchers
+            </a>
+            <a href="<c:url value='/admin/reviews'/>">
+                <span>⭐</span>
+                Manage Reviews
+            </a>
+        </nav>
         </aside>
         <main class="main-content">
             <div class="page-header">
@@ -77,7 +85,6 @@
                             <span>Admin</span>
                             <span class="admin-arrow">▼</span>
                         </button>
-                        <!-- Đã cập nhật đầy đủ các đường dẫn cho 4 chức năng -->
                         <div class="admin-dropdown" id="adminDropdown">
                             <a href="${pageContext.request.contextPath}/admin/profile" class="admin-dropdown-item">
                                 <span>👤</span>
@@ -87,12 +94,11 @@
                                 <span>🔑</span>
                                 <span>Đổi mật khẩu</span>
                             </a>
-                            <a href="${pageContext.request.contextPath}/admin/settings" class="admin-dropdown-item">
-                                <span>⚙️</span>
-                                <span>Cài đặt</span>
+                            <a href="${pageContext.request.contextPath}/home" class="admin-dropdown-item">
+                              <span>🏠</span>
+                              <span>Trang cửa hàng</span>
                             </a>
-                            <div class="admin-dropdown-divider">
-                            </div>
+                            <div class="admin-dropdown-divider"></div>
                             <a href="${pageContext.request.contextPath}/logout" class="admin-dropdown-item logout-item">
                                 <span>🚪</span>
                                 <span>Đăng xuất</span>
@@ -141,9 +147,7 @@
                         <h2>🍰 Sản phẩm hiện tại</h2>
                         <p>Danh sách bánh đang có trong hệ thống</p>
                     </div>
-                    <a href="<c:url value='/admin/manage-cakes'/>" class="view-all">
-                        Xem tất cả →
-                    </a>
+                    <a href="<c:url value='/admin/manage-cakes'/>" class="view-all">Xem tất cả →</a>
                 </div>
                 <div class="table-wrapper">
                     <table class="dashboard-table">
@@ -168,8 +172,7 @@
                                         </div>
                                     </td>
                                     <td class="dashboard-price">
-                                        <fmt:formatNumber value="${cake.price}" type="number" groupingUsed="true"/>
-                                        đ
+                                        <fmt:formatNumber value="${cake.price}" type="number" groupingUsed="true"/> đ
                                     </td>
                                     <td>${cake.stockQuantity}</td>
                                     <td>
@@ -200,9 +203,7 @@
                         <h2>🛒 Đơn hàng gần đây</h2>
                         <p>Các đơn hàng mới nhất trong hệ thống</p>
                     </div>
-                    <a href="<c:url value='/admin/manage-orders'/>" class="view-all">
-                        Xem tất cả →
-                    </a>
+                    <a href="<c:url value='/admin/manage-orders'/>" class="view-all">Xem tất cả →</a>
                 </div>
                 <div class="table-wrapper">
                     <table class="dashboard-table">
@@ -221,8 +222,7 @@
                                     <td>#${order.id}</td>
                                     <td>${order.customerName}</td>
                                     <td class="dashboard-price">
-                                        <fmt:formatNumber value="${order.totalAmount}" type="number" groupingUsed="true"/>
-                                        đ
+                                        <fmt:formatNumber value="${order.totalAmount}" type="number" groupingUsed="true"/> đ
                                     </td>
                                     <td>
                                         <c:choose>
@@ -261,116 +261,6 @@
                     </table>
                 </div>
             </section>
-            <section class="dashboard-card">
-                <div class="dashboard-card-header">
-                    <div>
-                        <h2>💰 Tổng quan doanh thu</h2>
-                        <p>Tình hình doanh thu của cửa hàng</p>
-                    </div>
-                </div>
-                <div class="dashboard-stats">
-                    <div class="stat-card green">
-                        <div class="stat-icon">💰</div>
-                        <div>
-                            <p>Tổng doanh thu</p>
-                            <h2>
-                                <fmt:formatNumber value="${totalRevenue}" type="number" groupingUsed="true"/>
-                                đ
-                            </h2>
-                            <span>Tất cả đơn hàng</span>
-                        </div>
-                    </div>
-                    <div class="stat-card purple">
-                        <div class="stat-icon">💵</div>
-                        <div>
-                            <p>Đã thanh toán</p>
-                            <h2>
-                                <fmt:formatNumber value="${paidRevenue}" type="number" groupingUsed="true"/>
-                                đ
-                            </h2>
-                            <span>Đơn đã thanh toán</span>
-                        </div>
-                    </div>
-                    <div class="stat-card orange">
-                        <div class="stat-icon">✅</div>
-                        <div>
-                            <p>Đơn hoàn thành</p>
-                            <h2>${completedOrders}</h2>
-                            <span>đơn hàng</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-wrapper">
-                    <table class="dashboard-table">
-                        <thead>
-                            <tr>
-                                <th>Trạng thái</th>
-                                <th>Số tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span class="status-badge status-good">Hoàn thành</span>
-                                </td>
-                                <td class="dashboard-price">
-                                    <fmt:formatNumber value="${completedRevenue}" type="number" groupingUsed="true"/>
-                                    đ
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="status-badge status-good">Đang giao</span>
-                                </td>
-                                <td class="dashboard-price">
-                                    <fmt:formatNumber value="${deliveringRevenue}" type="number" groupingUsed="true"/>
-                                    đ
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="status-badge status-warning">Chờ xử lý</span>
-                                </td>
-                                <td class="dashboard-price">
-                                    <fmt:formatNumber value="${pendingRevenue}" type="number" groupingUsed="true"/>
-                                    đ
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="status-badge status-danger">Đã hủy</span>
-                                </td>
-                                <td class="dashboard-price">
-                                    <fmt:formatNumber value="${cancelledRevenue}" type="number" groupingUsed="true"/>
-                                    đ
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-            <div class="dashboard-bottom">
-                <div class="quick-card">
-                    <div class="quick-icon">➕</div>
-                    <div>
-                        <h3>Thêm sản phẩm mới</h3>
-                        <p>Thêm một loại bánh mới vào cửa hàng.</p>
-                    </div>
-                    <a href="<c:url value='/admin/manage-cakes'/>">
-                        Thêm bánh →
-                    </a>
-                </div>
-                <div class="quick-card warning-card">
-                    <div class="quick-icon">⚠️</div>
-                    <div>
-                        <h3>Kiểm tra tồn kho</h3>
-                        <p>Có ${lowStock} sản phẩm đang có số lượng thấp.</p>
-                    </div>
-                    <a href="<c:url value='/admin/manage-cakes'/>">
-                        Kiểm tra →
-                    </a>
-                </div>
-            </div>
         </main>
 
         <script>
@@ -378,7 +268,6 @@
                 const notification = document.getElementById("notificationDropdown");
                 const adminMenu = document.getElementById("adminDropdown");
                 const arrow = document.querySelector(".admin-arrow");
-
                 if (notification) notification.classList.toggle("show");
                 if (adminMenu) adminMenu.classList.remove("show");
                 if (arrow) arrow.style.transform = "rotate(0deg)";
@@ -388,7 +277,6 @@
                 const adminMenu = document.getElementById("adminDropdown");
                 const notification = document.getElementById("notificationDropdown");
                 const arrow = document.querySelector(".admin-arrow");
-
                 if (notification) notification.classList.remove("show");
                 if (adminMenu) {
                     adminMenu.classList.toggle("show");
@@ -404,18 +292,14 @@
                 const notificationDropdown = document.getElementById("notificationDropdown");
                 const adminDropdown = document.getElementById("adminDropdown");
                 const arrow = document.querySelector(".admin-arrow");
-
                 if (notificationWrapper && notificationDropdown && !notificationWrapper.contains(event.target)) {
                     notificationDropdown.classList.remove("show");
                 }
-
                 if (adminAccount && adminDropdown && !adminAccount.contains(event.target)) {
                     adminDropdown.classList.remove("show");
                     if (arrow) arrow.style.transform = "rotate(0deg)";
                 }
             });
         </script>
-
     </body>
 </html>
-```[cite: 9]

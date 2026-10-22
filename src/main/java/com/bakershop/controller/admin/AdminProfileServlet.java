@@ -36,26 +36,42 @@ public class AdminProfileServlet extends HttpServlet {
             User currentUser = (User) session.getAttribute("user");
 
             if (currentUser == null) {
-                response.sendRedirect(request.getContextPath() + "/mock-login");
+                response.sendRedirect(request.getContextPath() + "/login");
                 return;
             }
 
             String oldPassword = request.getParameter("oldPassword");
             String newPassword = request.getParameter("newPassword");
+            String confirmPassword = request.getParameter("confirmPassword");
 
-            if (oldPassword == null || !oldPassword.equals(currentUser.getPasswordHash())) {
-                request.setAttribute("message", "❌ Mật khẩu cũ không chính xác!");
+            if (oldPassword == null || newPassword == null || confirmPassword == null ||
+                oldPassword.trim().isEmpty() || newPassword.trim().isEmpty() || confirmPassword.trim().isEmpty()) {
+                request.setAttribute("message", "❌ Vui lòng điền đầy đủ thông tin!");
+                request.getRequestDispatcher("/WEB-INF/views/admin/change-password.jsp").forward(request, response);
+                return;
+            }
+
+            if (!newPassword.equals(confirmPassword)) {
+                request.setAttribute("message", "❌ Mật khẩu mới và xác nhận mật khẩu không khớp!");
                 request.getRequestDispatcher("/WEB-INF/views/admin/change-password.jsp").forward(request, response);
                 return;
             }
 
             UserDAO userDAO = new UserDAO();
+            User latestUser = userDAO.getUserByPhoneNumber(currentUser.getPhoneNumber());
+
+            if (latestUser == null || !com.bakershop.utils.PasswordUtils.checkPassword(oldPassword, latestUser.getPasswordHash())) {
+                request.setAttribute("message", "❌ Mật khẩu cũ không chính xác!");
+                request.getRequestDispatcher("/WEB-INF/views/admin/change-password.jsp").forward(request, response);
+                return;
+            }
+
             boolean updated = userDAO.updatePasswordByPhone(currentUser.getPhoneNumber(), newPassword);
 
             if (updated) {
-                currentUser.setPasswordHash(newPassword);
-                session.setAttribute("user", currentUser);
-                request.setAttribute("message", "✅ Đổi mật khẩu thành công và đã cập nhật Database!");
+                latestUser.setPasswordHash(userDAO.getUserByPhoneNumber(currentUser.getPhoneNumber()).getPasswordHash());
+                session.setAttribute("user", latestUser);
+                request.setAttribute("message", "✅ Đổi mật khẩu thành công!");
             } else {
                 request.setAttribute("message", "❌ Lỗi khi cập nhật cơ sở dữ liệu!");
             }

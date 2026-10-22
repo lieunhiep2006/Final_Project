@@ -27,7 +27,46 @@ public class ReviewDAO {
 		}
 		return reviews;
 	}
+    public List<Review> getAllReviews(String starFilter) {
+		List<Review> reviews = new ArrayList<>();
+		StringBuilder sql = new StringBuilder(
+			"SELECT r.id, r.user_id, r.cake_id, r.rating, r.comment, r.image_url, u.full_name " +
+			"FROM review r JOIN [user] u ON u.id = r.user_id WHERE 1=1"
+		);
 
+		if (starFilter != null && !starFilter.isEmpty() && !starFilter.equals("all")) {
+			sql.append(" AND r.rating = ?");
+		}
+		sql.append(" ORDER BY r.id DESC");
+
+		try (Connection connection = DBContext.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql.toString())) {
+			
+			if (starFilter != null && !starFilter.isEmpty() && !starFilter.equals("all")) {
+				statement.setDouble(1, Double.parseDouble(starFilter));
+			}
+
+			try (ResultSet result = statement.executeQuery()) {
+				while (result.next()) {
+					reviews.add(map(result));
+				}
+			}
+		} catch (Exception exception) {
+			throw new IllegalStateException("Unable to load all reviews", exception);
+		}
+		return reviews;
+	}
+
+	public void deleteReview(Long id) {
+		String sql = "DELETE FROM review WHERE id = ?";
+		try (Connection connection = DBContext.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setLong(1, id);
+			statement.executeUpdate();
+		} catch (Exception exception) {
+			throw new IllegalStateException("Unable to delete review", exception);
+		}
+	}	
 	public void create(Review review) {
 		String sql = "INSERT INTO review (user_id, cake_id, rating, comment, image_url) VALUES (?, ?, ?, ?, ?)";
 		try (Connection connection = DBContext.getConnection();
